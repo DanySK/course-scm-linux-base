@@ -25,21 +25,21 @@
 
     <section><h1 id="basi-di-linux-secondo-modulo">BASI DI LINUX, SECONDO MODULO</h1>
 <h2 id="martina-baiardimailtombaiardiuniboit"><a href="mailto:m.baiardi@unibo.it">Martina Baiardi</a></h2>
-<h3 id="compiled-2024-09-09">Compiled 2024-09-09</h3>
+<h3 id="compiled-2024-09-10">Compiled 2024-09-10</h3>
 </section><section>
 <h1 id="macro-argomenti">Macro argomenti</h1>
 <h2 id="1-gestione-periferiche">1. Gestione periferiche</h2>
-<h2 id="2-analisi-e-gestione-dei-processi">2. Analisi e gestione dei processi</h2>
+<h2 id="2-strumenti-di-analisi-e-gestione-dei-processi">2. Strumenti di analisi e gestione dei processi</h2>
 <h2 id="3-networking">3. Networking</h2>
 </section><section>
 <h2 id="1-gestione-periferiche-1">1. Gestione periferiche</h2>
 </section><section>
-<h2 id="connessione-delle-periferiche">Connessione delle periferiche</h2>
 <div class="multiCol">
 <div class="col text-center">
 <p><img src="../images/pci-bus.svg" alt="../images/pci-bus.svg"></p>
 </div>
 <div class="col">
+<h3 id="connessione-delle-periferiche">Connessione delle periferiche</h3>
 <ul>
 <li>Tutte le periferiche sono connesse tramite un bus standard <em>PCI</em> (<em>Peripheral Component Interconnect</em>)</li>
 <li>Alcune di esse comunicano direttamente con il bus, altre tramite i <em>controller</em></li>
@@ -50,7 +50,7 @@ altri invece consentono di utilizzare protocolli standard per connettersi a peri
 </div>
 </div>
 </section><section>
-<h2 id="analisi-delle-periferiche-connesse-al-bus-pci">Analisi delle periferiche connesse al bus PCI</h2>
+<h3 id="analisi-delle-periferiche-connesse-al-bus-pci">Analisi delle periferiche connesse al bus PCI</h3>
 <h3 id="lspci"><code>lspci</code></h3>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> lspci
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">00:00.0 Host bridge: Intel Corporation Coffee Lake HOST and DRAM Controller (rev 0b)
@@ -112,12 +112,24 @@ Ad esempio, tutti i miei dispositivi USB sono connessi al <em>controller USB</em
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    |__ Port 001: Dev 005, If 0, Class=Mass Storage, Driver=uas, 5000M
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">        ID 152d:0578 JMicron Technology Corp. / JMicron USA Technology Corp. JMS578 SATA 6Gb/s
 </span></span></span></code></pre></div></section><section>
-<h2 id="gestione-delle-periferiche-in-linux">Gestione delle periferiche in Linux</h2>
 <div class="multiCol">
 <div class="col text-center">
-<p><img src="../images/linux-device-drivers.svg" alt="../images/linux-device-drivers.svg"></p>
+<img src="../images/linux-device-drivers.svg" width="80%">
 </div>
 <div class="col">
+<h3 id="driver">Driver</h3>
+<p>I <em>driver</em> sono moduli software di basso livello che consentono al sistema operativo di pilotare un dispositivo hardware.
+Un insieme di driver standard sono già previsti all’interno del sistema operativo, per dispositivi particolari potrebbe essere necessario installare driver aggiuntivi.</p>
+<p>Il sistema operativo espone poi delle interfacce standard per interagire con i dispositivi in modo <strong>trasparente</strong> per l’applicazione utente.</p>
+</div>
+</div>
+</section><section>
+<div class="multiCol">
+<div class="col text-center">
+<img src="../images/linux-device-drivers.svg" width="80%">
+</div>
+<div class="col">
+<h3 id="file-dispositivo">File dispositivo</h3>
 <p>La filosofia <em>“everything is a file”</em> si applica anche per le periferiche connesse alla macchina,
 infatti esistono dei file speciali nella cartella <em>/dev</em> che sono la rappresentazione nel file system dei dispositivi.</p>
 <p>Essendo dei file, il loro contenuto può essere analizzato come se fossero come tutti gli altri (utilizzando comandi come <code>cat</code>, <code>ls</code>, …),
@@ -125,7 +137,16 @@ però essi rappresentano delle interfacce di basso livello che le applicazioni u
 </div>
 </div>
 </section><section>
-<h2 id="gestione-dei-dispositivi-in-linux">Gestione dei dispositivi in Linux</h2>
+<div class="multiCol">
+<div class="col text-center">
+<h3 id="file-dispositivo-1">File dispositivo</h3>
+<p>All’interno della cartella <em>/dev</em> risiedono due categorie di file:</p>
+<ul>
+<li><strong>Character special files (c)</strong>: I/O basato sullo scambio di singoli caratteri (di dimensione 1 byte). Fanno parte di questa categoria dispotivi come <em>mouse</em>, <em>tastiere</em> e <em>schede audio</em>.</li>
+<li><strong>Block special files (b)</strong>: I/O basato sullo scambio di <em>blocchi</em> di dati. Fanno parte di questa categoria <em>usb</em> e <em>hard disk</em>.</li>
+</ul>
+</div>
+<div class="col">
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh /dev
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 4,0K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  21 root root            4,3K  5 set 12.54 .
@@ -149,11 +170,22 @@ però essi rappresentano delle interfacce di basso livello che le applicazioni u
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">brw-rw----   1 root disk     8,     1  2 set 14.47 sda1
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">brw-rw----   1 root disk     8,     2  2 set 14.47 sda2
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[...]
-</span></span></span></code></pre></div><p>All’interno della cartella <em>/dev</em> risiedono due categorie di file:</p>
-<ul>
-<li><strong>Character special files (c)</strong>: I/O basato sullo scambio di singoli caratteri (di dimensione 1 byte). Fanno parte di questa categoria dispotivi come <em>mouse</em>, <em>tastiere</em> e <em>schede audio</em>.</li>
-<li><strong>Block special files (b)</strong>: I/O basato sullo scambio di <em>blocchi</em> di dati. Fanno parte di questa categoria <em>usb</em> e <em>hard disk</em>.</li>
-</ul>
+</span></span></span></code></pre></div></div>
+</div>
+</section><section>
+<h3 id="character-device">Character device</h3>
+<p>Per comprendere meglio che cos’è un device che comunica tramite un <em>character special file</em>, consideriamo il mouse.</p>
+<p>Tutti i file all’interno della directory <code>/dev/input</code> consentono la comunicazione con le periferiche di input del nostro sistema (ad esempio: tastiera, mouse, webcam, …).</p>
+<p>All’interno della directory <code>/dev/input/by-path</code> è possibile esplorare i dispositivi in maniera “user-friendly”.</p>
+<br>
+<p><strong>Domanda</strong>: Cosa succede eseguendo il comando <code>cat /dev/input/mice</code>?</p>
+
+
+<span class="fragment ">
+  <p>Sto visualizzando i byte che il mio mouse invia al sistema operativo ad ogni movimento!</p>
+
+</span>
+
 </section><section>
 <h3 id="devsda-z1-15">/dev/sd[a-z][1-15]</h3>
 <p>Associati al file con prefisso <em>sd</em> (SCSI Disk) storicamente si potevano individuare tutti i dispositivi che utilizzavano SCSI (stampanti, scanner, hard disk, …), oggi il protocollo è in disuso, ma i sistemi Linux continuano a indirizzare hark disk (SCSI, IDE e SATA) e chiavette USB a questo percorso.</p>
@@ -174,9 +206,18 @@ Viene comunemente utilizzato per i <em>dischi a stato solido</em> (<em>SSD</em>)
 <li>Il block device <code>/dev/nvme0n1</code> rappresenta il namespace 1 all’interno del primo disco NVMe.</li>
 <li>Il block device <code>/dev/nvme0n1p[1-15]</code> rappresenta la partizione [1-15] all’interno del namespace 1 del primo disco NMVe.</li>
 </ul>
-<blockquote>
-<p>Il <em>namespace</em> di un disco NMVe è una suddivisione logica dei dati, gestita direttamente dal <em>controller</em> del disco stesso. I namespace vengono impiegati in computer con esigenze di sicurezza particolari. Comunemente nei pc desktop si utilizza il namespace di default, ovvero il numero 1. Più dettagli riguardo ai namespace sono riportati sul sito di NVMe: <a href="https://nvmexpress.org/resource/nvme-namespaces/">https://nvmexpress.org/resource/nvme-namespaces/</a>.</p>
-</blockquote>
+</section><section>
+<div class="multiCol">
+<div class="col">
+<h3 id="namespace-di-un-disco-nvme">Namespace di un disco NVMe</h3>
+<p>I <em>namespace</em> di un disco NMVe sono una suddivisione logica dei dati, gestita direttamente dal <em>controller</em> del disco stesso. Ogni namespace consente di essere trattato come un “disco” separato, consentendo un accesso concorrente rispetto gli altri namespace. I namespace vengono impiegati in computer con esigenze particolari, comunemente nei pc desktop si utilizza il namespace di default, ovvero il numero 1. Più dettagli riguardo ai namespace sono riportati sul sito di NVMe: <a href="https://nvmexpress.org/resource/nvme-namespaces/">https://nvmexpress.org/resource/nvme-namespaces/</a>.</p>
+<h3 id="partizioni-di-un-disco">Partizioni di un disco</h3>
+<p>Una partizione del disco definisce delle aree separate di memoria che possono essere gestite separatamente dal sistema operativo, ad ognuna di essere può essere associato un tipo di file system differente.</p>
+</div>
+<div class="col text-center">
+<img src="../images/nvme-namespaces.svg" width="80%">
+</div>
+</div>
 </section><section>
 <h3 id="pseudo-dispositivi">Pseudo-dispositivi</h3>
 <p>Sono dispositivi che non possiedono un componente fisico collegato al pc, ma offrono funzionalità implementate direttamente a livello di sistema operativo.
@@ -237,9 +278,7 @@ Un esempio:</li>
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">├─nvme0n1p1 259:1    0   300M  0 part /boot/efi
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">├─nvme0n1p2 259:2    0 459,7G  0 part /
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">└─nvme0n1p3 259:3    0    17G  0 part [SWAP]
-</span></span></span></code></pre></div><h4 id="partizioni-di-un-disco">Partizioni di un disco</h4>
-<p>Una partizione del disco definisce delle aree separate di memoria che possono essere gestite separatamente dal sistema operativo.</p>
-<p>Come mostra l’output del comando <code>lsblk</code> il disco in utilizzo sul pc presenta 3 partizioni, ciascuna delle quali ha un <em>punto di mount</em>.</p>
+</span></span></span></code></pre></div><p>Come mostra l’output del comando <code>lsblk</code> il disco in utilizzo sul pc presenta 3 partizioni, ciascuna delle quali ha un <em>punto di mount</em>.</p>
 <p>Un <em>punto di mount</em> è una directory del file system che è logicamente connessa ad un altro file system, in questo esempio proveniente dal disco primario.</p>
 </section><section>
 <h3 id="fdisk"><code>fdisk</code></h3>
@@ -291,9 +330,7 @@ mentre il comando <code>lsblk</code> mostra che il device <code>/dev/sda</code> 
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> umount /dev/sda
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh <span style="color:#000">$HOME</span>/usb
 </span></span></code></pre></div></section><section>
-<p>Marti potresti partire da qui quando fai il file system UNIX</p>
-<p>Dato che tutto è un file, <em>anche i dispositivi sono rappresentati come file</em>, e sono <em>“montati”</em> in una directory del file system.</p>
-<p>immagine con struttura file system</p>
+<h2 id="2-strumenti-di-analisi-e-gestione-dei-processi-1">2. Strumenti di analisi e gestione dei processi</h2>
 </section><section>
 <h3 id="parte-2----martina-baiardi">Parte 2 – Martina Baiardi</h3>
 <ul>
