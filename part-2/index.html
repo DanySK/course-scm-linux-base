@@ -332,6 +332,202 @@ mentre il comando <code>lsblk</code> mostra che il device <code>/dev/sda</code> 
 </span></span></code></pre></div></section><section>
 <h2 id="2-strumenti-di-analisi-e-gestione-dei-processi-1">2. Strumenti di analisi e gestione dei processi</h2>
 </section><section>
+<h3 id="processi">Processi</h3>
+<p>Ogni programma eseguito in un sistema linux ha il suo <em>processo</em>.</p>
+<p>I processi hanno una struttura gerarchica, la radice comune a tutti è il processo <em>init</em> responsabile dell’esecuzione di tutti i software all’interno del sistema.</p>
+<p>Ogni processo:</p>
+<ul>
+<li>Ha un suo identificativo univoco <em>PID</em>.</li>
+<li>È indipendente dagli altri, consentendo di eseguire simultaneamente.</li>
+<li>Ha il suo spazio di indirizzi in memoria (RAM), consentendo al processo di eseguire, scrivere e leggere liberamente in quella porzione di memoria senza sovrascrivere i dati di altri processi.</li>
+</ul>
+</section><section>
+<h3 id="stati-di-un-processo">Stati di un processo</h3>
+<p>Lo stato di un processo può essere:</p>
+<ul>
+<li><em>In esecuzione</em> (<em>Running</em>): il processo è attualmente in esecuzione e sta svolgendo il suo compito.</li>
+<li><em>In attesa</em> (<em>Sleeping</em>): il processo è in attesa di un evento per continuare la sua esecuzione, ad esempio l’attesa di un input da parte dell’utente.</li>
+<li><em>Sospeso</em> (<em>Stopped</em>): il processo ha ricevuto un segnale di terminazione, attraverso l’utilizzo dei comandi <code>kill</code> o <code>killall</code> e non sta eseguendo nessuna operazione, ma <strong>la sua esecuzione può essere riesumata</strong>.</li>
+<li><em>Zombie</em>: Il processo ha terminato la sua esecuzione e rilasciato tutte le risorse di sistema, ma non è stato rimosso dall’elenco dei processi attivi. Questo accade perchè l’<em>exit-code</em> non è stato letto dal processo padre, operazione necessaria per rimuoverlo dall’elenco.</li>
+</ul>
+<br>
+<br>
+<p>L’<em>exit-code</em> è un valore numerico (0-255) restituito al processo padre nel momento in cui un processo termina.
+La convenzione per gli exit-code è:</p>
+<ul>
+<li><code>0</code> significa che il processo è terminato correttamente</li>
+<li><code>1-255</code> il processo è terminato con un errore. Idealmente ogni valore identifica un errore differente, ma il significato che ad essi è associato può variare.</li>
+</ul>
+</section><section>
+<h3 id="tipi-di-processo">Tipi di processo</h3>
+<p>Un processo in esecuzione può essere di tre tipi:</p>
+<ul>
+<li><em>Foreground</em>: Richiedono che un utente li faccia partire e/o che interagisca con loro durante l’esecuzione. Di default tutti i comandi eseguono come processi in foreground. Un esempio di interazione con l’utente è la visualizzazione degli output di un comando lanciato da terminale: finchè esso non termina, infatti, l’utente non può eseguire un altro comando nello stesso terminale perchè “occupato” dal processo in esecuzione.</li>
+<li><em>Background</em>: Eseguono senza necessità di interagire con l’utente.</li>
+<li><em>Daemon</em>: Sono processi costantemente in esecuzione all’interno del sistema, alcuni in esecuzione e alcuni sospesi (stopped). Essi consentono di fornire servizi di sistema. Verranno approfonditi nel modulo corso di linux avanzato.</li>
+</ul>
+</section><section>
+<p>È possibile eseguire un processo in background post-ponendo <code>&amp;</code> al comando su terminale. Ad esempio:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> sh -c <span style="color:#4e9a06">'sleep 5 &amp;&amp; echo Terminato!'</span> <span style="color:#000;font-weight:bold">&amp;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1] 131593
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> <span style="color:#204a87">jobs</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1]  + 131593 running    sh -c 'sleep 5 &amp;&amp; echo Terminato!'
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> Terminato!
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1]  + 131593 done       sh -c 'sleep 5 &amp;&amp; echo Terminato!'
+</span></span></span></code></pre></div><p>Questo comando esegue uno script shell che attende 5 secondi poi scrive sullo standard output “Terminato!”.</p>
+<p>Se non lo eseguissi in background (rimuovendo <code>&amp;</code>) dovrei attendere 5 secondi prima di poter interagire nuovamente con il terminale da cui l’ho lanciato, perchè di default è un processo in foreground.</p>
+<p>Per gestire i processi in background <strong>figli del processo corrente</strong> posso eseguire:</p>
+<ul>
+<li><code>jobs</code> consente di visualizzare l’elenco dei sotto-processi in background</li>
+<li><code>fg</code> comando che consente di spostare l’esecuzione in foreground di un processo in background. Se non viene specificato l’id, viene prelevato l’ultimo che è stato posto in background.</li>
+</ul>
+</section><section>
+<h3 id="visualizzazione-dei-processi-in-esecuzione-top--htop">Visualizzazione dei processi in esecuzione (<code>top</code> / <code>htop</code>)</h3>
+<p><code>top</code> Consente di avere una visione real-time dei processi in esecuzione, insieme ad una preziosa panoramica delle risorse utilizzate rispetto alle totali.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> top
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">top - 15:33:59 up  4:42,  2 users,  load average: 2,70, 6,53, 4,70
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Tasks: 339 total,   1 running, 338 sleeping,   0 stopped,   0 zombie
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">%</span>Cpu<span style="color:#ce5c00;font-weight:bold">(</span>s<span style="color:#ce5c00;font-weight:bold">)</span>:  3,4 us,  1,5 sy,  0,0 ni, 94,4 id,  0,1 wa,  0,5 hi,  0,2 si,  0,0 st 
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">MiB Mem :  15808,3 total,    847,4 free,  10927,9 used,   5369,8 buff/cache     
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">MiB Swap:  17397,4 total,  17341,2 free,     56,2 used.   4880,4 avail Mem 
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 137878 anitvam   20   0 1239992 231768 211956 S   6,6   1,4   0:00.83 konsole
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    847 root      20   0 1182360 207444 141000 S   5,0   1,3  12:04.65 Xorg
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   1728 anitvam   20   0 2534772 279132 130920 S   4,7   1,7  10:47.28 kwin_x11
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   2716 anitvam   20   0   33,2g 658404 324392 S   4,3   4,1  19:14.92 chrome
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   2763 anitvam   20   0   32,4g 165380 110848 S   3,0   1,0   4:21.39 chrome
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">  77629 anitvam   20   0 1156,0g 401540 139904 S   2,0   2,5   4:31.55 chrome
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    679 root      20   0   22992  16612   6500 S   1,7   0,1   1:08.24 python3
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   1769 anitvam   20   0 3644448 417728 166268 S   1,3   2,6   5:16.92 plasmashell
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   4771 101       20   0 1555036 155724  46304 S   1,0   1,0   1:37.89 mongod
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    435 root     -51   0       0      0      0 S   0,7   0,0   0:16.40 irq/109-ELAN1401:00
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   1878 anitvam   20   0  246104  35724  30604 S   0,7   0,2   1:15.28 ksystemstats
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">  78013 anitvam   20   0 1155,9g 173896 110072 S   0,7   1,1   0:27.40 chrome
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 138113 anitvam   20   0 1131,9g 369660  93528 S   0,7   2,3   0:22.63 code
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 140042 anitvam   20   0   11072   8060   5884 R   0,7   0,0   0:00.07 top
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    171 root       0 -20       0      0      0 I   0,3   0,0   0:01.47 kworker/2:1H-events_highpri
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    678 root      20   0  413844  25020  20668 S   0,3   0,2   0:16.80 NetworkManager
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   1725 anitvam   20   0  772716  64736  53452 S   0,3   0,4   0:04.25 ksmserver
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   1963 anitvam   20   0 5887584 285932  41824 S   0,3   1,8   1:16.35 jetbrains-toolb
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">  77659 anitvam   20   0 1219,6g 319376 111132 S   0,3   2,0   4:21.60 chrome
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">...
+</span></span></span></code></pre></div></section><section>
+<div class="multiCol">
+<div class="col">
+<p><code>top</code> è un comando interattivo, che aggiorna le informazioni ogni intervallo di tempo prestabilito.</p>
+<p>Una volta individuato un processo critico che sta utilizzando un numero inaspettatamente superiore delle risorse previste, è possibile mandargli il segnale di terminazione direttamente mentre <code>top</code> è in esecuzione, premendo il tasto <code>k</code> sulla tastiera.</p>
+<p>Una volta premuto k posso indicare a direttamente l’id e il segnale da mandare al processo.</p>
+</div>
+<div class="col text-center">
+<p>Esiste anche una versione più semplice da navigare con anche una presentazione a colori, chiamata <code>htop</code>.</p>
+<img src="../images/htop.png">
+</div>
+</div>
+</section><section>
+<h3 id="load-average">Load average</h3>
+<p>La prima riga di output del comando <code>top</code> riporta delle informazioni importanti per un amministratore di sistema,
+infatti, esse mostrano da quanto tempo il computer è in esecuzione, quanti utenti sono attivi in un determinato momento e qual è il <em>load average</em> del sistema.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> top
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">top - 15:33:59 up  4:42,  2 users,  load average: 2,70, 6,53, 4,70
+</span></span></span></code></pre></div><p>Il <em>load average</em> non è altro che la media del numero di processi in attesa di essere eseguiti dal processore.</p>
+<p>La metrica mostra tre valori in quanto rappresentano la media per gli ultimi 1, 5 e 15 minuti d’esecuzione.</p>
+<br>
+<p><strong>Si può ottenere la stessa informazione eseguendo il comando <code>uptime</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> uptime
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 16:06:02 up  5:14,  2 users,  load average: 1,02, 1,19, 1,77
+</span></span></span></code></pre></div></section><section>
+<h3 id="amministrazione-dei-processi">Amministrazione dei processi</h3>
+<p>I processi in esecuzione, scrivono importanti informazioni sull’andamento della loro esecuzione in file di <code>log</code>.</p>
+<p>I file di log sono fondamentali per gestire un processo fallito in modo inaspettato e identificare una soluzione.</p>
+<p>I file di log sono memorizzati nella cartella <code>/var/log</code> e possono essere di due formati: <em>log di sistema</em> (in binario) e <em>log di testo normale</em>.</p>
+<p>Gran parte delle applicazioni memorizzano utilizzando il servizio di log di sistema, per interagire con essi è necessario passare dall’utility di <code>journalctl</code>.</p>
+</section><section>
+<h3 id="journalctl"><code>journalctl</code></h3>
+<br>
+<h4 id="journalctl--b"><code>journalctl -b</code></h4>
+<p>Filtra i log a partire dal riavvio più recente. Altrimenti l’output parte dai log più vecchi memorizzati.
+È possibile specificare di quanti riavvii il journal deve filtrare gli output con degli indici negativi;
+se <code>0</code> indica il riavvio corrente, <code>-1</code> indica quello precedente e così via.</p>
+<h4 id="journalctl--p-err"><code>journalctl -p err</code></h4>
+<p>Filtra i log per livello di gravità “err”.</p>
+<h4 id="journalctl--k"><code>journalctl -k</code></h4>
+<p>Filtra i log relativi al kernel.</p>
+<h4 id="journalctl---since-yesterday"><code>journalctl --since yesterday</code></h4>
+<p>Filtra i log a partire dal giorno precedente.</p>
+<h4 id="journalctl---since-2024-01-09---until-2024-09-09"><code>journalctl --since "2024-01-09" --until "2024-09-09"</code></h4>
+<p>Filtra i log appartenenti ad un intervallo di tempo prestabilito, specificato con lo standard ISO 8601 (<em>YYYY-MM-DD</em>).</p>
+<h4 id="journalctl--f"><code>journalctl -f</code></h4>
+<p>Mostra i log correnti e mostra i log in tempo reale nel terminale.</p>
+</section><section>
+<div class="multiCol">
+<div class="col">
+<h4 id="ma-questi-dati-non-saturano-il-disco-a-lungo-termine">Ma questi dati non saturano il disco a lungo termine?</h4>
+
+
+<span class="fragment ">
+  <p><strong>Potenzialmente sì</strong>.</p>
+<p>Per questo motivo, a intervalli di tempo stabiliti, i file di log vengono <em>ruotati</em>, ovvero:</p>
+<ol>
+<li>Rinominati</li>
+<li>Sostituiti da nuovi file di log</li>
+<li>Compressi con gzip</li>
+</ol>
+<p>Grazie alla rotazione dei log è quindi possibile ottimizzare lo spazio occupato da essi, seppur mantenendo la possibilità di analizzarli in futuro.
+<code>logrotate</code> è il comando che si occupa della rotazione dei file di log, configurato con il file di sistema <code>/etc/logrotate.conf</code>.</p>
+
+</span>
+
+</div>
+<div class="col">
+
+
+<span class="fragment ">
+  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat /etc/logrotate.conf
+</span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> see <span style="color:#4e9a06">"man logrotate"</span> <span style="color:#204a87;font-weight:bold">for</span> details
+</span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> rotate log files weekly
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">weekly
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> keep <span style="color:#0000cf;font-weight:bold">4</span> weeks worth of backlogs
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">rotate 4
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> restrict maximum size of log files
+</span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span>size 20M
+</span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> create new <span style="color:#ce5c00;font-weight:bold">(</span>empty<span style="color:#ce5c00;font-weight:bold">)</span> log files after rotating old ones
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">create
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> uncomment this <span style="color:#204a87;font-weight:bold">if</span> you want your log files compressed
+</span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span>compress
+</span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> Logs are moved into directory <span style="color:#204a87;font-weight:bold">for</span> rotation
+</span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> olddir /var/log/archive
+</span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> Ignore pacman saved files
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">tabooext + .pacorig .pacnew .pacsave
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> Arch packages drop log rotation information into this directory
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">include /etc/logrotate.d
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">/var/log/wtmp {
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    monthly
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    create 0664 root utmp
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    minsize 1M
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    rotate 1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">}
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">/var/log/btmp {
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    missingok
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    monthly
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    create 0600 root utmp
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    rotate 1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">}
+</span></span></span></code></pre></div>
+</span>
+
+</div>
+</div>
+</section><section>
 <h3 id="parte-2----martina-baiardi">Parte 2 – Martina Baiardi</h3>
 <ul>
 <li>Basic Linux Networking
@@ -388,23 +584,6 @@ mentre il comando <code>lsblk</code> mostra che il device <code>/dev/sda</code> 
 </ul>
 </li>
 </ul>
-<h2 id="strumenti-per-analisi-processi">Strumenti per analisi processi</h2>
-<ul>
-<li>Foreground and Background processes</li>
-<li>Process states</li>
-<li>load average</li>
-<li>ps command</li>
-<li>top/htop command</li>
-<li>kill command</li>
-</ul>
-<h2 id="strumenti-per-analisi-risorse-di-sistema">Strumenti per analisi risorse di sistema</h2>
-<h2 id="log-di-sistema">Log di sistema</h2>
-<ul>
-<li>log rotate e gestione dei log di systemctl (size, persistence time)</li>
-<li>/var/log</li>
-<li>journalctl</li>
-</ul>
-<p><a href="https://info-ee.surrey.ac.uk/Teaching/Unix/">https://info-ee.surrey.ac.uk/Teaching/Unix/</a></p>
 </section>
 
   
