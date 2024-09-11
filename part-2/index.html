@@ -337,7 +337,7 @@ mentre il comando <code>lsblk</code> mostra che il device <code>/dev/sda</code> 
 <p>I processi hanno una struttura gerarchica, la radice comune a tutti è il processo <em>init</em> responsabile dell’esecuzione di tutti i software all’interno del sistema.</p>
 <p>Ogni processo:</p>
 <ul>
-<li>Ha un suo identificativo univoco <em>PID</em>.</li>
+<li>Ha un identificatore numerico univoco, chiamato <strong>PID</strong> (Process IDentifier). Il PID è un numero intero positivo, e viene assegnato in ordine crescente ad ogni processo che viene creato. Il PID del processo corrente può essere ottenuto con il comando <code>echo $$</code>.</li>
 <li>È indipendente dagli altri, consentendo di eseguire simultaneamente.</li>
 <li>Ha il suo spazio di indirizzi in memoria (RAM), consentendo al processo di eseguire, scrivere e leggere liberamente in quella porzione di memoria senza sovrascrivere i dati di altri processi.</li>
 </ul>
@@ -366,6 +366,15 @@ La convenzione per gli exit-code è:</p>
 <li><em>Background</em>: Eseguono senza necessità di interagire con l’utente.</li>
 <li><em>Daemon</em>: Sono processi costantemente in esecuzione all’interno del sistema, alcuni in esecuzione e alcuni sospesi (stopped). Essi consentono di fornire servizi di sistema. Verranno approfonditi nel modulo corso di linux avanzato.</li>
 </ul>
+</section><section>
+<h3 id="stato-corrente-dei-processi-ps">Stato corrente dei processi: <code>ps</code></h3>
+<p>Il comando <code>ps</code> (Process Status) permette di ottenere informazioni sui processi attivi.</p>
+<p>Di default, <code>ps</code> mostra i processi attivi dell’utente corrente.</p>
+<p><code>ps</code> senza opzioni mostra i processi dell’utente corrente associati al terminale su cui ps viene lanciato.</p>
+<p><code>ps a</code> mostra i processi di tutti gli utenti.</p>
+<p><code>ps u</code> mostra le informazioni in formato user-oriented.</p>
+<p><code>ps x</code> mostra informazioni sui processi che non hanno un terminale di controllo (background, demoni, servizi)</p>
+<p>Le tre opzioni vengono tipicamente combinate: <code>ps aux</code></p>
 </section><section>
 <p>È possibile eseguire un processo in background post-ponendo <code>&amp;</code> al comando su terminale. Ad esempio:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> sh -c <span style="color:#4e9a06">'sleep 5 &amp;&amp; echo Terminato!'</span> <span style="color:#000;font-weight:bold">&amp;</span>
@@ -424,6 +433,29 @@ La convenzione per gli exit-code è:</p>
 <img src="../images/htop.png">
 </div>
 </div>
+</section><section>
+<h3 id="processi-segnali-e-loro-gestione">Processi, segnali, e loro gestione</h3>
+<p>UNIX consente ai processi di inviare segnali ad altri processi.</p>
+<p>I segnali sono numerici, e ciascuno ha un significato specifico.</p>
+<p>Quelli più rilevanti per noi sono:</p>
+<ol>
+<li><code>SIGINT</code> (2) – segnale che viene inviato alla pressione di <kbd>Ctrl</kbd><kbd>C</kbd>, che chiede al processo di terminare ordinatamente (simile a <code>SIGTERM</code>)</li>
+<li><code>SIGTERM</code> (15) – segnale di terminazione, che chiede al processo di terminare ordinatamente</li>
+<li><code>SIGKILL</code> (9) – segnale di terminazione forzata, che termina il processo immediatamente</li>
+<li><code>SIGSTOP</code> (19) – segnale di pausa del processo, che lo sospende senza terminarlo</li>
+<li><code>SIGCONT</code> (18) – segnale di continuazione del processo, che lo fa ripredere se attualmente sospeso</li>
+</ol>
+</section><section>
+<h3 id="invio-di-segnali-ai-processi-kill">Invio di segnali ai processi: <code>kill</code></h3>
+<p>A dispetto del nome, il comando <code>kill</code> non “uccide” i processi, ma permette di inviare loro segnali.</p>
+<p>Sintassi: <code>kill [opzioni] PID</code>.
+Se nessuna opzione viene specificata, al processo target viene inviato un segnale <code>SIGTERM</code>.</p>
+<p>Può essere inviato un segnale diverso sostituendo <code>SIG</code> con <code>-</code>, per esempio: <code>kill -KILL 6754</code> manda un <code>SIGKILL</code> al processo con PID 6754.</p>
+<p>Con l’opzione <code>-s</code>, è possibile inviare un segnale in base al suo numero.
+Il comando precedente è equivalente a <code>kill -s 9 6754</code></p>
+<h3 id="invio-di-segnali-a-processi-usando-il-nome-killall">Invio di segnali a processi usando il nome: <code>killall</code></h3>
+<p>Il comando <code>killall</code> è simile a <code>kill</code>, ma invece di prendere un PID,
+prende un nome di processo e invia il segnale a tutti i processi che corrispondono a quel nome</p>
 </section><section>
 <h3 id="load-average">Load average</h3>
 <p>La prima riga di output del comando <code>top</code> riporta delle informazioni importanti per un amministratore di sistema,
@@ -1008,86 +1040,238 @@ Questo significa che se è necessaria, verrà implementata direttamente nel live
 </div>
 </section><section>
 <h3 id="networking-in-linux">Networking in Linux</h3>
+<p>Il networking di un sistema Linux si basa sulla configurazione delle <em>interfacce</em>.</p>
+<p>Linux supporta diversi tipi di interfacce, dove le più comuni sono quelle fisiche, che tratteremo in questo modulo.</p>
+<p>Esistono anche interfacce di rete virtuali (<em>VLAN</em>) e interfacce <em>bridge</em> che possono essere configurate per scopi particolari, come ad esempio la virtualizzazione.</p>
 </section><section>
-<h4 id="interfacce">Interfacce</h4>
+<h3 id="comando-ip">Comando <code>ip</code></h3>
+<br>
+<h4 id="ip-link-list"><code>ip link list</code></h4>
+<p>Consente di visualizzare la lista delle interfacce di rete configurate all’interno della macchina, insieme al loro <em>stato</em>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
+</span></span></span></code></pre></div><p>Le parentesi angolari danno informazioni immediate riguardo alle interfacce che sto analizzando:</p>
 <ul>
-<li>
-<p>ip link</p>
-</li>
-<li>
-<p>ip addr</p>
-</li>
-<li>
-<p>ip link down/up</p>
-</li>
-<li>
-<p>ip route</p>
-</li>
-<li>
-<p>Network MAnager vs ip command</p>
-</li>
-<li>
-<p>/etc/network/interfaces</p>
-</li>
-<li>
-<p>traceroute</p>
-</li>
-<li></li>
+<li><em>UP</em>: Significa che l’interfaccia è abilitata</li>
+<li><em>DOWN</em>: Significa che l’interfaccia <strong>non</strong> è abilitata</li>
+<li><em>LOWER_UP</em>: Significa che il collegamento dell’interfaccia è attivo</li>
+<li><em>NO_CARRIER</em>: Significa che l’interfaccia è abilitata, ma non ha nessun collegamento</li>
+</ul>
+<p>Un’altra informazione importante visibile in questo output è l’indirizzo <em>MAC</em> associato a ciascuna interfaccia.</p>
+</section><section>
+<h3 id="comando-ip-1">Comando <code>ip</code></h3>
+<br>
+<h4 id="ip-addr-list"><code>ip addr list</code></h4>
+<p>Oltre a mostrare le informazioni legate allo stato delle interfacce di rete disponibili, mostra quali sono gli IP (v4 e v6) associati a tali interfacce.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip addr list
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet 127.0.0.1/8 scope host lo
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft forever preferred_lft forever
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet6 ::1/128 scope host noprefixroute 
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft forever preferred_lft forever
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet 172.20.10.5/28 brd 172.20.10.15 scope global dynamic noprefixroute wlo1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft 86133sec preferred_lft 86133sec
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet6 fe80::2171:37c:1573:7e67/64 scope link noprefixroute 
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft forever preferred_lft forever
+</span></span></span></code></pre></div></section><section>
+<h3 id="interfaccia-di-loopback">Interfaccia di loopback</h3>
+<p>È una scheda di rete virtuale, sempre presente e sempre <em>UP</em>, anche se il pc non è connesso ad internet, che consente di gestire una porzione di traffico senza passare dalla scheda di rete.</p>
+<p>Nelle reti di computer, l’interfaccia di loopback permette la comunicazione tra processi, ma esclusivamente tra processi che sono eseguiti nella stessa macchina.</p>
+<p>Un esempio tipico di utilizzo è quello in cui si deve testare il funzionamento di un server web, realizzando una connessione con un client eseguito sulla stessa macchina su cui è eseguito anche il server.</p>
+</section><section>
+<h3 id="abilitaredisabilitare-una-interfaccia">Abilitare/Disabilitare una interfaccia</h3>
+<h4 id="ip-link-set-interface-status"><code>ip link set &lt;interface&gt; &lt;status&gt;</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list wlo1
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> ip link <span style="color:#204a87">set</span> wlo1 down
+</span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list wlo1
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noqueue state DOWN mode DORMANT group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> ip link <span style="color:#204a87">set</span> wlo1 up
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
+</span></span></span></code></pre></div><p>L’assenza del <em>NO_CARRIER</em> quando l’interfaccia è <em>DOWN</em> mi consente si sapere che l’interfaccia è <em>amministrativamente</em> disabilitata, e non è un problema di collegamento.</p>
+</section><section>
+<h3 id="assegnare-un-ip-ad-una-interfaccia-di-rete">Assegnare un IP ad una interfaccia di rete</h3>
+<h4 id="ip-addr-add-ipsubnet_mask-dev-interface"><code>ip addr add &lt;ip&gt;/&lt;subnet_mask&gt; dev &lt;interface&gt;</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip addr list wlo1
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet 172.20.10.5/28 brd 172.20.10.15 scope global dynamic noprefixroute wlo1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft 86085sec preferred_lft 86085sec
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet6 fe80::2171:37c:1573:7e67/64 scope link noprefixroute 
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft forever preferred_lft forever
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> ip addr add 172.20.10.6/28 dev wlo1
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet 172.20.10.5/28 brd 172.20.10.15 scope global dynamic noprefixroute wlo1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft 86019sec preferred_lft 86019sec
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet 172.20.10.6/28 scope global secondary wlo1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft forever preferred_lft forever
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet6 fe80::2171:37c:1573:7e67/64 scope link noprefixroute 
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft forever preferred_lft forever
+</span></span></span></code></pre></div><p>Siccome la mia interfaccia aveva già assegnato un indirizzo, il comando eseguito non cancella quello precedente, ma aggiunge semplicemente un IP alternativo a quello principale. Per rimuoverlo posso utilizzare il comando <code>ip addr del 172.20.10.6/28 dev wlo1</code>.</p>
+</section><section>
+<h3 id="come-rendere-le-configurazioni-permanenti">Come rendere le configurazioni permanenti</h3>
+<p>Tutto ciò che viene eseguito con il comando <code>ip</code> in un terminale non è <em>persistente</em>.
+Questo significa che al riavvio della macchina tutte le modifiche saranno eliminate.</p>
+<p>Storicamente nei sistemi <em>Ubuntu</em> una configurazione di rete persistente al riavvio richiedeva la modifica manuale del file <code>/etc/network/interfaces</code>, il cui contenuto descrive tutte le informazioni necessarie per configurare le interfacce di rete.</p>
+<p>I sistemi più recenti, però, hanno sostituito la gestione della rete con nuovi strumenti come:</p>
+<ul>
+<li><em>NetworkManager</em> per installazioni linux Desktop</li>
+<li><em>systemd-networkd</em> per installazioni linux Server</li>
 </ul>
 </section><section>
-<h3 id="parte-2----martina-baiardi">Parte 2 – Martina Baiardi</h3>
-<ul>
-<li>Layer 2
-<ul>
-<li>mac address               OK</li>
-<li>Loopback interface        TODO</li>
-<li>Ethernet/Wi-Fi interfaces OK</li>
-</ul>
-</li>
-<li>Layer 3
-<ul>
-<li>TCP/IPv4 addresses        OK
-<ul>
-<li>format                  OK</li>
-<li>netmasks                OK</li>
-</ul>
-</li>
-<li>DHCP</li>
-<li>NAT                       OK</li>
-<li>DNS</li>
-<li>NTP</li>
-</ul>
-</li>
-<li>Network configuration
-<ul>
-<li>ip command</li>
-<li>nmngr che cos’è
-<ul>
-<li>systemd/networkd (?)</li>
-<li>nmcli command</li>
-<li>/etc/network/interfaces</li>
-<li>ping command</li>
-<li>traceroute</li>
-<li>nslookup</li>
-<li>netstat</li>
-<li>configurazione rete tramite dhcp</li>
-<li>configurazione rete WPA2/WPA3
-<ul>
-<li>wpa_cli command</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Network tools
-<ul>
-<li>/etc/hosts</li>
-<li>curl</li>
-<li>wget</li>
-</ul>
-</li>
-</ul>
+<h4 id="etcnetworkinterfaces">/etc/network/interfaces</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">#</span> The loopback interface.
+</span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">auto lo
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">iface lo inet loopback
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">#</span> An example ethernet card setup: <span style="color:#ce5c00;font-weight:bold">(</span>broadcast and gateway are optional<span style="color:#ce5c00;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">auto eth0
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">iface eth0 inet static
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     address 192.168.0.42
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     network 192.168.0.0
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     netmask 255.255.255.0
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     broadcast 192.168.0.255
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     gateway 192.168.0.1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">auto eth1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">iface eth1 inet dhcp
+</span></span></span></code></pre></div></section><section>
+<h3 id="tabella-di-instradamento-degli-ip-nel-mio-host">Tabella di instradamento degli ip nel mio host</h3>
+<h4 id="ip-route-list"><code>ip route list</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip route list
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">default via 172.20.10.1 dev wlo1 proto dhcp src 172.20.10.5 metric 600 
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">172.20.10.0/28 dev wlo1 proto kernel scope link src 172.20.10.5 metric 600 
+</span></span></span></code></pre></div><p>So che il mio <em>default gateway</em> è <code>172.20.10.1</code>, che è l’indiririzzo del router nella mia sotto-rete che mi consente la comunicazione verso l’esterno.</p>
+<p>La comunicazione di default avverrà con l’interfaccia di rete <code>wlo1</code>, al quale è associato l’ip <code>172.20.10.5</code>.</p>
+<p>Tutte le comunicazioni per la sottorete <code>172.20.10.0/28</code> passeranno per l’interfaccia di rete <code>wlo1</code>.</p>
+</section><section>
+<h3 id="wpa_supplicant">wpa_supplicant</h3>
+<p>Per connettersi ad una rete WiFi (<em>IEEE 802.11X</em>) è necessario utilizzare il protocollo di sicurezza <em>WPA</em>.</p>
+<p><em>wpa supplicant</em> è un demone di sistema che consente di gestire proprio questo tipo di connesioni.</p>
+<h4 id="iwlist-scan"><code>iwlist scan</code></h4>
+<p>Consente di effettuare una scansione per individuare gli <code>SSID</code> raggiungibili dalla connessione WiFi del mio computer.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> iwlist scan
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">...
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">lo        Interface doesn't support scanning.
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">wlo1      Scan completed :
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">          Cell 01 - Address: 16:41:A5:B5:E5:0F
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Channel:6
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Frequency:2.437 GHz (Channel 6)
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Quality=63/70  Signal level=-47 dBm  
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Encryption key:on
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    ESSID:"iPhone di Martina"
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                              24 Mb/s; 36 Mb/s; 54 Mb/s
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 48 Mb/s
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[...]
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> Cell 03 - Address: D8:44:89:27:7F:42
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Channel:1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Frequency:2.412 GHz (Channel 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Quality=45/70  Signal level=-65 dBm  
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Encryption key:on
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    ESSID:"anitvam-home"
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 9 Mb/s
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                              18 Mb/s; 36 Mb/s; 54 Mb/s
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Bit Rates:6 Mb/s; 12 Mb/s; 24 Mb/s; 48 Mb/s
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">[...]
+</span></span></span></code></pre></div></section><section>
+<h3 id="generazione-di-un-file-di-autenticazione">Generazione di un file di autenticazione</h3>
+<h4 id="wpa_passphrase-ssid-password--wpaconf"><code>wpa_passphrase &lt;SSID&gt; &lt;PASSWORD&gt; &gt; wpa.conf</code></h4>
+<h4 id="wpa_passphrase-ssid--wpaconf"><code>wpa_passphrase &lt;SSID&gt; &gt; wpa.conf</code></h4>
+<p>Consentono di generare un file di configurazione chiamato <code>wpa.conf</code> che conterrà l’SSID dell’access point al quale voglio connettermi e la mia password hashata.</p>
+<p>È possibile omettere la password per poterla inserire da standard input</p>
+<h3 id="associazione-ad-una-rete-wifi">Associazione ad una rete WiFi</h3>
+<h4 id="wpa_supplicant--iinterfaccia--cpercorso_assolutowpaconf"><code>wpa_supplicant -i&lt;interfaccia&gt; -c&lt;percorso_assoluto&gt;/wpa.conf</code></h4>
+<p>Il processo non viene fatto di default in background, per farlo bisogna passare il flag <code>-B</code></p>
+<h3 id="ottenere-un-indirizzo-ip-tramite-dhcp">Ottenere un indirizzo ip tramite DHCP</h3>
+<h4 id="dhclient-wlo1"><code>dhclient wlo1</code></h4>
+<p>Ottengo così un indirizzo ip sfruttando DHCP installato nel mio router.</p>
+</section><section>
+<h3 id="devo-fare-tutte-le-volte-questi-passaggi">Devo fare tutte le volte questi passaggi?</h3>
+<p>In realtà no, perchè queste configurazioni di basso livello sono già fornite all’interno dei tool di più alto livello citati in precedenza, ovvero <em>NetworkManager</em> e <em>systemd-networkd</em>.</p>
+<div class="multiCol">
+<div class="col">
+<h4 id="systemd-networkd">Systemd-networkd</h4>
+<p>Questo tool è fornito solitamente con le distribuzioni server, si configura interamente attraverso file di configurazione che risiedono nel file <code>/etc/systemd/network</code>.</p>
+</div>
+<div class="col">
+<h4 id="network-manager">Network Manager</h4>
+<p>Tool fornito nelle distribuzioni Desktop di Linux.</p>
+<p>Tipicamente si configura utilizzando direttamente l’interfaccia grafica, però esso fornisce una utility da linea di comando che consente di effettuare le operazioni di <code>ip</code>, <code>wpa_cli</code> e <code>dhclient</code> sopra citate.</p>
+</div>
+</div>
+</section><section>
+<h3 id="come-testare-la-mia-connettività-di-rete">Come testare la mia connettività di rete</h3>
+<h4 id="ping-host"><code>ping</code> <host></host></h4>
+<p>L’utility <code>ping</code> manda a raffica dei pacchetti all’host destinazione.
+Quando la destinazione riceve un messaggio di ping risponde al mittente, e il comando tiene traccia del tempo che il specifico messaggio ha impiegato per andare a destinazione e tornare indietro.</p>
+<p>Il monitoraggio del tempo di transito di questo pacchetto consente di verificare l’efficienza della comunicazione di rete.</p>
+<p>Posso specificare come host un indirizzo ip o un hostname.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ping google.com
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">ping google.com
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">PING google.com (142.251.209.46) 56(84) bytes of data.
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">64 bytes from mil04s51-in-f14.1e100.net (142.251.209.46): icmp_seq=1 ttl=116 time=29.3 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">64 bytes from mil04s51-in-f14.1e100.net (142.251.209.46): icmp_seq=2 ttl=116 time=70.7 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">64 bytes from mil04s51-in-f14.1e100.net (142.251.209.46): icmp_seq=3 ttl=116 time=67.6 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">64 bytes from mil04s51-in-f14.1e100.net (142.251.209.46): icmp_seq=4 ttl=116 time=64.1 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[...]
+</span></span></span></code></pre></div></section><section>
+<h3 id="altri-strumenti-di-diagnostica-utili">Altri strumenti di diagnostica utili</h3>
+<div class="multiCol">
+<div class="col">
+<h4 id="traceroute"><code>traceroute</code></h4>
+<p>Fornisce una mappa del percorso compiuto dai dati su Internet dall’origine alla destinazione, mostrando il percorso compiuto dal pacchetto.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> traceroute 8.8.8.8
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">1  _gateway (172.20.10.1)  6.582 ms  6.438 ms  6.377 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2  * * *
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">3  192.168.9.46 (192.168.9.46)  72.874 ms * *
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">4  192.168.255.19 (192.168.255.19)  73.690 ms  73.645 ms  73.601 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">5  ppp176-paris2.isdnet.net (194.149.182.176)  80.137 ms * *
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">6  * * 194.149.189.58 (194.149.189.58)  70.836 ms
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">7  * * *
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">8  * * *
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">9  dns.google (8.8.8.8)  74.866 ms  76.534 ms  37.069 ms
+</span></span></span></code></pre></div></div>
+<div class="col">
+<h4 id="nslookup"><code>nslookup</code></h4>
+<p>Consente di effettuare delle query DNS per ottenere l’indirizzo ip associato ad un hostname.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> nslookup google.com
+</span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Server:         172.20.10.1
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Address:        172.20.10.1#53
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">Non-authoritative answer:
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Name:   google.com
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Address: 142.251.209.46
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Name:   google.com
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Address: 2a00:1450:4002:414::200e
+</span></span></span></code></pre></div><p>L’indirizzo verso il quale rivolgo le mie query DNS in questo caso è il gateway appartenente alla mia rete locale, che a sua volta instraderà il messaggio verso il DNS di destinazione.</p>
+<p>È possibile modificare il server a cui porre le query modificando il file di sistema <code>/etc/resolv.conf</code></p>
+</div>
+</div>
+<p>È possibile configurare una tabella di risoluzione di ip locale, che il pc consulta prima di inoltrare la richiesta al DNS server, utile in caso si hanno degli ip noti nella rete locale ai quali si vuole associare un hostname valido solo nel mio pc.
+Per farlo posso aggiungere delle entry al file <code>/etc/hosts</code>.</p>
 </section>
 
   
