@@ -291,14 +291,14 @@ Un esempio:</li>
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">I/O size (minimum/optimal): 512 bytes / 512 bytes
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Disklabel type: gpt
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Disk identifier: BCA6CA00-08B6-6245-83F8-FC173D095FFA
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">Device             Start        End   Sectors   Size Type
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Device             Start        End   Sectors   Size Type
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/dev/nvme0n1p1      4096     618495    614400   300M EFI System
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/dev/nvme0n1p2    618496  964576913 963958418 459,7G Linux filesystem
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/dev/nvme0n1p3 964576914 1000206899  35629986    17G Linux swap
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
 </span></span></span><span style="display:flex;"><span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">Disk /dev/sda: 29,3 GiB, 31457280000 bytes, 61440000 sectors
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Disk /dev/sda: 29,3 GiB, 31457280000 bytes, 61440000 sectors
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Disk model: ProductCode     
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Units: sectors of 1 * 512 = 512 bytes
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Sector size (logical/physical): 512 bytes / 512 bytes
@@ -379,9 +379,9 @@ La convenzione per gli exit-code è:</p>
 <p>È possibile eseguire un processo in background post-ponendo <code>&amp;</code> al comando su terminale. Ad esempio:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> sh -c <span style="color:#4e9a06">'sleep 5 &amp;&amp; echo Terminato!'</span> <span style="color:#000;font-weight:bold">&amp;</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1] 131593
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> <span style="color:#204a87">jobs</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">jobs</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1]  + 131593 running    sh -c 'sleep 5 &amp;&amp; echo Terminato!'
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> Terminato!
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> Terminato!
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1]  + 131593 done       sh -c 'sleep 5 &amp;&amp; echo Terminato!'
 </span></span></span></code></pre></div><p>Questo comando esegue uno script shell che attende 5 secondi poi scrive sullo standard output “Terminato!”.</p>
 <p>Se non lo eseguissi in background (rimuovendo <code>&amp;</code>) dovrei attendere 5 secondi prima di poter interagire nuovamente con il terminale da cui l’ho lanciato, perchè di default è un processo in foreground.</p>
@@ -396,11 +396,11 @@ La convenzione per gli exit-code è:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> top
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">top - 15:33:59 up  4:42,  2 users,  load average: 2,70, 6,53, 4,70
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Tasks: 339 total,   1 running, 338 sleeping,   0 stopped,   0 zombie
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">%</span>Cpu<span style="color:#ce5c00;font-weight:bold">(</span>s<span style="color:#ce5c00;font-weight:bold">)</span>:  3,4 us,  1,5 sy,  0,0 ni, 94,4 id,  0,1 wa,  0,5 hi,  0,2 si,  0,0 st 
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">%</span>Cpu<span style="color:#ce5c00;font-weight:bold">(</span>s<span style="color:#ce5c00;font-weight:bold">)</span>:  3,4 us,  1,5 sy,  0,0 ni, 94,4 id,  0,1 wa,  0,5 hi,  0,2 si,  0,0 st 
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">MiB Mem :  15808,3 total,    847,4 free,  10927,9 used,   5369,8 buff/cache     
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">MiB Swap:  17397,4 total,  17341,2 free,     56,2 used.   4880,4 avail Mem 
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 137878 anitvam   20   0 1239992 231768 211956 S   6,6   1,4   0:00.83 konsole
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    847 root      20   0 1182360 207444 141000 S   5,0   1,3  12:04.65 Xorg
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">   1728 anitvam   20   0 2534772 279132 130920 S   4,7   1,7  10:47.28 kwin_x11
@@ -519,36 +519,36 @@ se <code>0</code> indica il riavvio corrente, <code>-1</code> indica quello prec
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> see <span style="color:#4e9a06">"man logrotate"</span> <span style="color:#204a87;font-weight:bold">for</span> details
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> rotate log files weekly
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">weekly
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> keep <span style="color:#0000cf;font-weight:bold">4</span> weeks worth of backlogs
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> keep <span style="color:#0000cf;font-weight:bold">4</span> weeks worth of backlogs
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">rotate 4
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> restrict maximum size of log files
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> restrict maximum size of log files
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span>size 20M
 </span></span><span style="display:flex;"><span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> create new <span style="color:#ce5c00;font-weight:bold">(</span>empty<span style="color:#ce5c00;font-weight:bold">)</span> log files after rotating old ones
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> create new <span style="color:#ce5c00;font-weight:bold">(</span>empty<span style="color:#ce5c00;font-weight:bold">)</span> log files after rotating old ones
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">create
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> uncomment this <span style="color:#204a87;font-weight:bold">if</span> you want your log files compressed
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> uncomment this <span style="color:#204a87;font-weight:bold">if</span> you want your log files compressed
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span>compress
 </span></span><span style="display:flex;"><span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> Logs are moved into directory <span style="color:#204a87;font-weight:bold">for</span> rotation
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> Logs are moved into directory <span style="color:#204a87;font-weight:bold">for</span> rotation
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> olddir /var/log/archive
 </span></span><span style="display:flex;"><span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> Ignore pacman saved files
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> Ignore pacman saved files
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">tabooext + .pacorig .pacnew .pacsave
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#8f5902">#</span> Arch packages drop log rotation information into this directory
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> Arch packages drop log rotation information into this directory
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">include /etc/logrotate.d
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">/var/log/wtmp {
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/var/log/wtmp {
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    monthly
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    create 0664 root utmp
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    minsize 1M
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    rotate 1
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">}
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">/var/log/btmp {
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/var/log/btmp {
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    missingok
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    monthly
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    create 0600 root utmp
@@ -1093,12 +1093,12 @@ Questo significa che se è necessaria, verrà implementata direttamente nel live
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> ip link <span style="color:#204a87">set</span> wlo1 down
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link <span style="color:#204a87">set</span> wlo1 down
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list wlo1
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noqueue state DOWN mode DORMANT group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> ip link <span style="color:#204a87">set</span> wlo1 up
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link <span style="color:#204a87">set</span> wlo1 up
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
@@ -1114,7 +1114,7 @@ Questo significa che se è necessaria, verrà implementata direttamente nel live
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft 86085sec preferred_lft 86085sec
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet6 fe80::2171:37c:1573:7e67/64 scope link noprefixroute 
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">       valid_lft forever preferred_lft forever
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> ip addr add 172.20.10.6/28 dev wlo1
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip addr add 172.20.10.6/28 dev wlo1
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
@@ -1139,20 +1139,20 @@ Questo significa che al riavvio della macchina tutte le modifiche saranno elimin
 <h4 id="etcnetworkinterfaces">/etc/network/interfaces</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">#</span> The loopback interface.
 </span></span><span style="display:flex;"><span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">auto lo
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">auto lo
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">iface lo inet loopback
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">#</span> An example ethernet card setup: <span style="color:#ce5c00;font-weight:bold">(</span>broadcast and gateway are optional<span style="color:#ce5c00;font-weight:bold">)</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> An example ethernet card setup: <span style="color:#ce5c00;font-weight:bold">(</span>broadcast and gateway are optional<span style="color:#ce5c00;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">auto eth0
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">auto eth0
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">iface eth0 inet static
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     address 192.168.0.42
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     network 192.168.0.0
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     netmask 255.255.255.0
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     broadcast 192.168.0.255
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">     gateway 192.168.0.1
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">auto eth1
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">auto eth1
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">iface eth1 inet dhcp
 </span></span></span></code></pre></div></section><section>
 <h3 id="tabella-di-instradamento-degli-ip-nel-mio-host">Tabella di instradamento degli ip nel mio host</h3>
@@ -1172,8 +1172,8 @@ Questo significa che al riavvio della macchina tutte le modifiche saranno elimin
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> iwlist scan
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">...
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">lo        Interface doesn't support scanning.
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">wlo1      Scan completed :
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">wlo1      Scan completed :
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">          Cell 01 - Address: 16:41:A5:B5:E5:0F
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Channel:6
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Frequency:2.437 GHz (Channel 6)
@@ -1193,8 +1193,8 @@ Questo significa che al riavvio della macchina tutte le modifiche saranno elimin
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 9 Mb/s
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                              18 Mb/s; 36 Mb/s; 54 Mb/s
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">                    Bit Rates:6 Mb/s; 12 Mb/s; 24 Mb/s; 48 Mb/s
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">[...]
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[...]
 </span></span></span></code></pre></div></section><section>
 <h3 id="generazione-di-un-file-di-autenticazione">Generazione di un file di autenticazione</h3>
 <h4 id="wpa_passphrase-ssid-password--wpaconf"><code>wpa_passphrase &lt;SSID&gt; &lt;PASSWORD&gt; &gt; wpa.conf</code></h4>
@@ -1260,8 +1260,8 @@ Quando la destinazione riceve un messaggio di ping risponde al mittente, e il co
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> nslookup google.com
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Server:         172.20.10.1
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Address:        172.20.10.1#53
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#a40000">
-</span></span></span><span style="display:flex;"><span><span style="color:#a40000"></span><span style="color:#000;font-style:italic">Non-authoritative answer:
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Non-authoritative answer:
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Name:   google.com
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Address: 142.251.209.46
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Name:   google.com

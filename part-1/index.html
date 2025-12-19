@@ -364,14 +364,14 @@ Se non viene specificato un percorso, <code>cd</code> porta alla home directory 
 (directory identificata anche dal simbolo speciale <code>~</code>).</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> <span style="color:#204a87">cd</span> myFolder
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">cd</span> myFolder
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects/myFolder
 </span></span></span></code></pre></div><p>Dato che <code>..</code> è la directory padre,
 è possibile tornare alla directory precedente con <code>cd ..</code></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects/myFolder
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> <span style="color:#204a87">cd</span> ..
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">cd</span> ..
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects
 </span></span></span></code></pre></div></section><section>
@@ -380,9 +380,9 @@ Se non viene specificato un percorso, <code>cd</code> porta alla home directory 
 <p>Il comando <code>touch</code> permette di aggiornare la data di ultima modifica di un file al momento corrente.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -l
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">-rw-r--r--  1 danysk danysk  12K Aug  5 11:19 LICENSE
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> date
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> date
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2024-08-06T14:25:21 CEST
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> touch LICENSE
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> touch LICENSE
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -l
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">-rw-r--r--  1 danysk danysk  12K Aug  6 14:25 LICENSE
 </span></span></span></code></pre></div><p>L’utilizzo più comune di <code>touch</code>, però, è la creazione di un file vuoto: è sufficiente “toccare” un file che non esiste.</p>
@@ -390,7 +390,7 @@ Se non viene specificato un percorso, <code>cd</code> porta alla home directory 
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 8,0K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  2 danysk danysk 4,0K Aug  6 14:29 .
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x 14 danysk danysk 4,0K Aug  6 14:28 ..
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> touch mynewfile
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> touch mynewfile
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 8,0K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  2 danysk danysk 4,0K Aug  6 14:29 .
@@ -406,7 +406,7 @@ Prende in ingresso un solo argomento: il percorso della directory da creare.</p>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 8,0K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  2 danysk danysk 4,0K Aug  6 14:30 .
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x 14 danysk danysk 4,0K Aug  6 14:28 ..
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> mkdir ciao
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> mkdir ciao
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> mkdir -p pippo/pluto/paperino
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 16K
@@ -537,7 +537,7 @@ Prende un numero arbitrario di argomenti, e li restituisce concatenati in uscita
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Hello, world!"</span> &gt; hello.txt
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat hello.txt
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Hello, world!
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Hello, world! 2"</span> &gt;&gt; hello.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Hello, world! 2"</span> &gt;&gt; hello.txt
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat hello.txt
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Hello, world!
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Hello, world! 2
@@ -675,7 +675,7 @@ Fortunatamente, UNIX ha un sistema di manualistica integrato.</p>
 <p>Il comando <code>whatis</code> permette di ottenere una descrizione molto breve di un comando.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> whatis ls
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">ls (1)               - list directory contents
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> whatis whatis
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> whatis whatis
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">whatis (1)           - display one-line manual page descriptions
 </span></span></span></code></pre></div><h3 id="manuale-completo-man">Manuale completo: <code>man</code></h3>
 <p>Il comando <code>man</code> permette di visualizzare il manuale completo di un comando.</p>
@@ -953,9 +953,9 @@ allora viene chiesto l’inserimento della password dell’utente remoto.</p>
 <p>La password che va inserita è quella dell’utente remoto, esattamente come verrebbe chiesta se ci si loggasse direttamente sul server.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">[pluto@notebook ~]$</span> whoami
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">pluto
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">[pluto@notebook ~]$</span> ssh pippo@my-server.my-domain.com
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">[pluto@notebook ~]$</span> ssh pippo@my-server.my-domain.com
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Password: ******** # Password di pippo, non di pluto
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">[pippo@server ~]$</span> whoami
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">[pippo@server ~]$</span> whoami
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">pippo
 </span></span></span></code></pre></div></section><section>
 <h2 id="secure-shell-6">Secure shell</h2>
@@ -1092,7 +1092,7 @@ ma la stringa vuota <code>''''</code>!</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#000">variabile</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"prova"</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Stasera sono </span><span style="color:#4e9a06">${</span><span style="color:#000">variabile</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">to"</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Stasera sono provato
-</span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"></span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Stasera sono </span><span style="color:#000">$variabileto</span><span style="color:#4e9a06">"</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Stasera sono </span><span style="color:#000">$variabileto</span><span style="color:#4e9a06">"</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Stasera sono
 </span></span></span></code></pre></div></section><section>
 <h2 id="bash-scripting-3">Bash scripting</h2>
