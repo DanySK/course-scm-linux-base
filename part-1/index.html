@@ -25,7 +25,7 @@
 
     <section><h1 id="basi-di-linux-parte-prima">BASI DI LINUX, PARTE PRIMA</h1>
 <h2 id="danilo-pianini"><a href="mailto:danilo.pianini@unibo.it">Danilo Pianini</a></h2>
-<h3 id="compiled-2026-01-26">Compiled 2026-01-26</h3>
+<h3 id="compiled-2026-01-28">Compiled 2026-01-28</h3>
 </section><section>
 <h2 id="il-sistema-operativo">Il sistema operativo</h2>
 <p>Strato software che si occupa di gestire l’hardware,
@@ -179,17 +179,17 @@ per ragioni di compatibilità, il file system di
 <p>All’apertura, e in qualunque momento, il terminale si trova in una <em>directory</em> (cartella) del file system.</p>
 <p>Normalmente, alla sua apertura, si trova nella <em>home directory</em> dell’utente.</p>
 <p>Possiamo sempre sapere in che directory ci troviamo con il comando <code>pwd</code> (print working directory).</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects
 </span></span></span></code></pre></div></section><section>
 <h2 id="manipolazione-di-base-del-file-system-1">Manipolazione di base del file system</h2>
 <h3 id="elencare-il-contenuto-della-directory-corrente-ls">Elencare il contenuto della directory corrente: <code>ls</code></h3>
 <p>Il comando <code>ls</code> (list) permette di elencare il contenuto della directory corrente.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">LICENSE     assets  config.toml  layouts        resources  shared-slides  themes
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">archetypes  build   content      renovate.json  scm.md     static
 </span></span></span></code></pre></div><p>Di default, <em>omette i file nascosti</em>, che possono essere visualizzati con l’opzione <code>-a</code> (all).</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -a
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -a
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">.        .gitignore        LICENSE     config.toml    resources      themes
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">..       .gitmodules       archetypes  content        scm.md
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">.git     .hugo_build.lock  assets      layouts        shared-slides
@@ -199,7 +199,7 @@ per ragioni di compatibilità, il file system di
 <h2 id="manipolazione-di-base-del-file-system-2">Manipolazione di base del file system</h2>
 <h3 id="visione-dettagliata-opzione--l-di-ls">Visione dettagliata: opzione <code>-l</code> di <code>ls</code></h3>
 <p>L’opzione <code>-l</code> di <code>ls</code> mostra anche permessi, dimensione e data di ultima modifica di ogni elemento.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -l
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -l
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 60
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">-rw-r--r--  1 danysk danysk 11344 Aug  5 11:19 LICENSE
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  2 danysk danysk  4096 Aug  5 11:19 archetypes
@@ -312,7 +312,7 @@ ottenuto concatenando i permessi dei tre gruppi.</p>
 <h3 id="dimensioni-più-comprensibili-opzione--h-di-ls">Dimensioni più comprensibili: opzione <code>-h</code> di <code>ls</code></h3>
 <p>L’opzione <code>-h</code> di <code>ls</code> mostra la dimensione in formato “human-readable”,
 e funziona solo assieme a <code>-l</code>.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -lh
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -lh
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 60K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">-rw-r--r--  1 danysk danysk  12K Aug  5 11:19 LICENSE
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  2 danysk danysk 4,0K Aug  5 11:19 archetypes
@@ -331,7 +331,7 @@ e funziona solo assieme a <code>-l</code>.</p>
 <h2 id="manipolazione-di-base-del-file-system-6">Manipolazione di base del file system</h2>
 <h3 id="dettagli-completi-ls--ahl">Dettagli completi: <code>ls -ahl</code></h3>
 <p>le tre opzioni <code>a</code>, <code>l</code>, ed <code>h</code> possono (e solitamente sono) utilizzate all’unisono.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 88K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  13 danysk danysk 4,0K Aug  5 12:05 .
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x 108 danysk danysk 4,0K Aug  5 11:19 ..
@@ -362,14 +362,14 @@ che prende un solo argomento: il percorso della directory di destinazione,
 relativo o assoluto.
 Se non viene specificato un percorso, <code>cd</code> porta alla home directory dell’utente corrente
 (directory identificata anche dal simbolo speciale <code>~</code>).</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">cd</span> myFolder
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects/myFolder
 </span></span></span></code></pre></div><p>Dato che <code>..</code> è la directory padre,
 è possibile tornare alla directory precedente con <code>cd ..</code></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/home/danysk/LocalProjects/myFolder
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">cd</span> ..
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">pwd</span>
@@ -378,7 +378,7 @@ Se non viene specificato un percorso, <code>cd</code> porta alla home directory 
 <h2 id="manipolazione-di-base-del-file-system-8">Manipolazione di base del file system</h2>
 <h3 id="aggiornamento-della-data-di-ultima-modifica-touch">Aggiornamento della data di ultima modifica: <code>touch</code></h3>
 <p>Il comando <code>touch</code> permette di aggiornare la data di ultima modifica di un file al momento corrente.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -l
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -l
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">-rw-r--r--  1 danysk danysk  12K Aug  5 11:19 LICENSE
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> date
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2024-08-06T14:25:21 CEST
@@ -386,7 +386,7 @@ Se non viene specificato un percorso, <code>cd</code> porta alla home directory 
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -l
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">-rw-r--r--  1 danysk danysk  12K Aug  6 14:25 LICENSE
 </span></span></span></code></pre></div><p>L’utilizzo più comune di <code>touch</code>, però, è la creazione di un file vuoto: è sufficiente “toccare” un file che non esiste.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 8,0K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  2 danysk danysk 4,0K Aug  6 14:29 .
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x 14 danysk danysk 4,0K Aug  6 14:28 ..
@@ -402,7 +402,7 @@ Se non viene specificato un percorso, <code>cd</code> porta alla home directory 
 <p>Il comando <code>mkdir</code> (make directory) permette di creare una nuova directory.
 Prende in ingresso un solo argomento: il percorso della directory da creare.</p>
 <p>Il comando è in grado di creare anche directory annidate, se viene specificata l’opzione <code>-p</code>.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 8,0K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  2 danysk danysk 4,0K Aug  6 14:30 .
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x 14 danysk danysk 4,0K Aug  6 14:28 ..
@@ -510,7 +510,7 @@ Ognuno degli stream standard ha un file descriptor associato:</p>
 </ul>
 <p>Dunque <code>0&lt;</code> equivale a <code>&lt;</code>, <code>1&gt;</code> equivale a <code>&gt;</code>, e <code>2&gt;</code> redirige <code>stderr</code>.</p>
 <p>Se si volesse che un comando salvasse i messaggi di errore su error.log, e i messaggi di output su output.log, si potrebbe fare così:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-style:italic">my_command &gt; output.log 2&gt; error.log
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-style:italic">my_command &gt; output.log 2&gt; error.log
 </span></span></span></code></pre></div></section><section>
 <h2 id="standard-input-output-ed-error-2">Standard input, output, ed error</h2>
 <h3 id="redirezione-unione">Redirezione unione</h3>
@@ -518,7 +518,7 @@ Ognuno degli stream standard ha un file descriptor associato:</p>
 redirezionandone uno su un altro.</p>
 <p>È possibile, ad esempio, redirigere <code>stderr</code> verso <code>stdout</code> con <code>2&gt;&amp;1</code>,
 ad esempio perché si vuole che entrambi appaiano in un solo file di log:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-style:italic">my_command &gt; output.log 2&gt;&amp;1
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-style:italic">my_command &gt; output.log 2&gt;&amp;1
 </span></span></span></code></pre></div><p>diversamente, lo stream di errore resterebbe agganciato al device file del terminale!</p>
 <h3 id="piping">Piping</h3>
 <p>L’operatore <code>|</code> permette di concatenare due comandi, facendo sì che l’output di uno diventi l’input dell’altro.</p>
@@ -534,7 +534,7 @@ Prende un numero arbitrario di argomenti, e li stampa separati da uno spazio.</p
 <p>Il comando <code>cat</code> (concatenate) permette di concatenare file.
 Prende un numero arbitrario di argomenti, e li restituisce concatenati in uscita.</p>
 <p>Il comando è molto utile per visualizzare il contenuto di un file.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Hello, world!"</span> &gt; hello.txt
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Hello, world!"</span> &gt; hello.txt
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat hello.txt
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Hello, world!
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Hello, world! 2"</span> &gt;&gt; hello.txt
@@ -568,7 +568,7 @@ La modalità “fetch” di <code>tail</code> è attivata con l’opzione <code>
 <p>L’opzione <code>-name</code> permette di cercare file per nome.</p>
 <p>L’opzione <code>-type</code> permette di cercare file per tipo.</p>
 <h4 id="esempi">Esempi</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> find /home/utente -type f -name <span style="color:#4e9a06">"documento.txt"</span> <span style="color:#8f5902;font-style:italic"># Cerca un file col nome esatto "documento.txt"</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> find /home/utente -type f -name <span style="color:#4e9a06">"documento.txt"</span> <span style="color:#8f5902;font-style:italic"># Cerca un file col nome esatto "documento.txt"</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> find /home/utente -type d -name <span style="color:#4e9a06">"progetti"</span> <span style="color:#8f5902;font-style:italic"># Cerca una directory col nome esatto "progetti"</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> find /home/utente -type f -name <span style="color:#4e9a06">"*.txt"</span> <span style="color:#8f5902;font-style:italic"># Cerca tutti i file con estensione .txt (si possono usare i glob!)</span>
 </span></span></code></pre></div></section><section>
@@ -578,7 +578,7 @@ La modalità “fetch” di <code>tail</code> è attivata con l’opzione <code>
 <p>Prende un numero arbitrario di argomenti,
 e per ciascuno restituisce il percorso dell’eseguibile che implementa il comando specificato
 (se esiste).</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> which cat <span style="color:#204a87">echo</span> intellij-idea-ultimate-edition pippo
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> which cat <span style="color:#204a87">echo</span> intellij-idea-ultimate-edition pippo
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/usr/bin/cat
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">echo: shell built-in command
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">/usr/bin/intellij-idea-ultimate-edition
@@ -625,7 +625,7 @@ per trasformare l’output di un comando precedente.</p>
 <h3 id="filtraggio-di-base-con-grep">Filtraggio di base con <code>grep</code></h3>
 <p>Un esempio di filtro è <code>grep</code>, che permette di filtrare righe di testo in base a un pattern.</p>
 <p><code>grep</code> prende un pattern da cercare in input, e restituisce le righe che contengono il pattern.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat commedia.txt <span style="color:#000;font-weight:bold">|</span> grep Caron
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat commedia.txt <span style="color:#000;font-weight:bold">|</span> grep Caron
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">  E 'l duca lui: "Caron, non ti crucciare:
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">  Caron dimonio, con occhi di bragia,
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">e però, se Caron di te si lagna,
@@ -636,7 +636,7 @@ per trasformare l’output di un comando precedente.</p>
 </ul>
 <p>Ad esempio, possiamo scoprire quante righe nel della Divina Commedia non contengono nè la lettera <code>s</code> nè la lettera <code>t</code>
 (si noti che il comando è case-sensitive):</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> grep -v s &lt; commedia.txt <span style="color:#000;font-weight:bold">|</span> grep -v t <span style="color:#000;font-weight:bold">|</span> grep -v S <span style="color:#000;font-weight:bold">|</span> grep -v T -c
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> grep -v s &lt; commedia.txt <span style="color:#000;font-weight:bold">|</span> grep -v t <span style="color:#000;font-weight:bold">|</span> grep -v S <span style="color:#000;font-weight:bold">|</span> grep -v T -c
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">559
 </span></span></span></code></pre></div><p><code>grep</code> supporta il filtraggio utilizzando <a href="https://it.wikipedia.org/wiki/Espressione_regolare#Espressioni_regolari_tradizionali_di_UNIX">Espressioni Regolari (regex)</a>, che non copriamo in questo corso.</p>
 </section><section>
@@ -646,7 +646,7 @@ per trasformare l’output di un comando precedente.</p>
 <p>Per questo viene utilizzato spesso in combinazione con <code>find</code>.</p>
 <h4 id="esempio">Esempio</h4>
 <p>Stampa a schermo del contenuto di tutti i file che si chiamano info.log nella home directory dell’utente e nelle sue sottodirectory:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> find ~ -type f -name <span style="color:#4e9a06">"info.log"</span> <span style="color:#000;font-weight:bold">|</span> xargs cat
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> find ~ -type f -name <span style="color:#4e9a06">"info.log"</span> <span style="color:#000;font-weight:bold">|</span> xargs cat
 </span></span></code></pre></div></section><section>
 <h2 id="esercizio">Esercizio</h2>
 <p>Data una directory in <code>/log/my_app</code> con struttura non nota,
@@ -661,7 +661,7 @@ stampare tutte le righe di tutti i file <code>.log</code> che contengono la paro
 
 
 <span class="fragment ">
-  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> find /log/my_app -type f -name <span style="color:#4e9a06">"*.log"</span> <span style="color:#000;font-weight:bold">|</span> xargs cat <span style="color:#000;font-weight:bold">|</span> grep ERROR
+  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> find /log/my_app -type f -name <span style="color:#4e9a06">"*.log"</span> <span style="color:#000;font-weight:bold">|</span> xargs cat <span style="color:#000;font-weight:bold">|</span> grep ERROR
 </span></span></code></pre></div>
 </span>
 
@@ -673,7 +673,7 @@ specialmente quando non vengono utilizzati quotidianamente.</p>
 Fortunatamente, UNIX ha un sistema di manualistica integrato.</p>
 <h3 id="cosa-fa-un-comando-whatis">Cosa fa un comando? <code>whatis</code></h3>
 <p>Il comando <code>whatis</code> permette di ottenere una descrizione molto breve di un comando.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> whatis ls
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> whatis ls
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">ls (1)               - list directory contents
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> whatis whatis
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">whatis (1)           - display one-line manual page descriptions
@@ -741,7 +741,7 @@ Utilizzo: <code>useradd [opzioni] nome_utente</code></p>
 e <code>wheel</code> (amministratori),
 con shell di default <code>bash</code>
 e home directory popolata a partire dal contenuto di <code>/etc/skel</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">#</span> useradd -m -G lp,audio,docker,wheel -s /bin/bash pluto
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">#</span> useradd -m -G lp,audio,docker,wheel -s /bin/bash pluto
 </span></span></code></pre></div></section><section>
 <h2 id="utenti-gruppi-e-permessi-4">Utenti, gruppi, e permessi</h2>
 <h3 id="settare-o-cambiare-la-password-di-un-utente-passwd">Settare o cambiare la password di un utente: <code>passwd</code></h3>
@@ -951,7 +951,7 @@ Nella stessa cartella si troverà la chiave privata <box-icon name="key" flip="h
 non ha successo,
 allora viene chiesto l’inserimento della password dell’utente remoto.</p>
 <p>La password che va inserita è quella dell’utente remoto, esattamente come verrebbe chiesta se ci si loggasse direttamente sul server.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">[pluto@notebook ~]$</span> whoami
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">[pluto@notebook ~]$</span> whoami
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">pluto
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">[pluto@notebook ~]$</span> ssh pippo@my-server.my-domain.com
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Password: ******** # Password di pippo, non di pluto
@@ -1000,7 +1000,7 @@ copiando localmente il file che la contiene.</li>
 
 
 <span class="fragment ">
-  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> scp user@my-server.my-domain.com:/etc/ssh/sshd_config server_sshd_config
+  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> scp user@my-server.my-domain.com:/etc/ssh/sshd_config server_sshd_config
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#8f5902;font-style:italic"># Modifica il file</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> scp server_sshd_config root@my-server.my-domain.com:/etc/ssh/sshd_config
 </span></span></code></pre></div>
@@ -1048,7 +1048,7 @@ che significa che:</p>
 <p>Uno <em>script</em> è un file di testo contenente una sequenza di comandi che possono essere eseguiti in sequenza.</p>
 <p>La prima riga di uno script bash ben formato deve essere la <em>shebang line</em>,
 che indica il percorso dell’interprete da usare per eseguire lo script.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#!/bin/bash
 </span></span></span></code></pre></div><p>Si noti che, cambiando la shebang line, è possibile scrivere script in altri linguaggi, ad esempio Python, Ruby, Kotlin, eccetera.</p>
 <ul>
 <li><code>#!/usr/bin/env python</code></li>
@@ -1064,9 +1064,9 @@ che indica il percorso dell’interprete da usare per eseguire lo script.</p>
 <h3 id="variabili">Variabili</h3>
 <p>Le variabili in bash sono definite senza dichiarazione di tipo, e sono sempre stringhe.</p>
 <p>Per assegnare un valore a una variabile, si usa l’operatore <code>=</code>, che va usato senza spazi:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">nome_variable</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"valore"</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000">nome_variable</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"valore"</span>
 </span></span></code></pre></div><p>La variabile può essere letta prefiggendo al nome il simbolo <code>$</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#000">$nome_variable</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#000">$nome_variable</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">valore
 </span></span></span></code></pre></div><p>I nomi di variabili possono contenere lettere, numeri, e <code>_</code>, ma non devono iniziare con un numero</p>
 <ul>
@@ -1077,19 +1077,19 @@ che indica il percorso dell’interprete da usare per eseguire lo script.</p>
 <h2 id="bash-scripting-2">Bash scripting</h2>
 <h3 id="string-expansion-variabili">String expansion: variabili</h3>
 <p>Le variabili possono essere interpolate (<em>espanse</em>) in stringhe con le doppie virgolette:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#000">nome_variable</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"valore"</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#000">nome_variable</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"valore"</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Il valore della variabile è </span><span style="color:#000">$nome_variable</span><span style="color:#4e9a06">"</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Il valore della variabile è valore
 </span></span></span></code></pre></div><p>Al contrario, le singole virgolette non interpolano le variabili:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">'Il valore della variabile è $nome_variable'</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">'Il valore della variabile è $nome_variable'</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Il valore della variabile è $nome_variable
 </span></span></span></code></pre></div><p><strong>ATTENZIONE</strong>: l’espansione di una variabile non assegnata non è un errore
 (comportamento modificabile),
 ma la stringa vuota <code>''''</code>!</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Il valore della variabile è </span><span style="color:#000">$nome_varbaile</span><span style="color:#4e9a06">"</span> <span style="color:#8f5902;font-style:italic"># Notare l'errore di battitura</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Il valore della variabile è </span><span style="color:#000">$nome_varbaile</span><span style="color:#4e9a06">"</span> <span style="color:#8f5902;font-style:italic"># Notare l'errore di battitura</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Il valore della variabile è
 </span></span></span></code></pre></div><p>È possibile utilizzare le parentesi graffe per identificare il nome di una variabile ed evitare casi di ambiguità:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#000">variabile</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"prova"</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#000">variabile</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">"prova"</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Stasera sono </span><span style="color:#4e9a06">${</span><span style="color:#000">variabile</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">to"</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Stasera sono provato
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Stasera sono </span><span style="color:#000">$variabileto</span><span style="color:#4e9a06">"</span>
@@ -1100,12 +1100,12 @@ ma la stringa vuota <code>''''</code>!</p>
 <h3 id="command-output-expansion">Command output expansion</h3>
 <p>Per eseguire un comando e usare il suo output come stringa, si usa la <em>command output expansion</em>,
 che si ottiene racchiudendo il comando tra parentesi tonde:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Oggi è </span><span style="color:#204a87;font-weight:bold">$(</span>date<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">"</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"Oggi è </span><span style="color:#204a87;font-weight:bold">$(</span>date<span style="color:#204a87;font-weight:bold">)</span><span style="color:#4e9a06">"</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Oggi è Mon 25 Oct 2021 10:00:00 AM CEST
 </span></span></span></code></pre></div><h3 id="arithmetic-expansion">Arithmetic expansion</h3>
 <p>Per eseguire operazioni aritmetiche, si usa la <em>arithmetic expansion</em>,
 che si ottiene racchiudendo l’operazione tra parentesi tonde e precedendo la parentesi aperta con <code>$((</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"2 + 2 fa </span><span style="color:#204a87;font-weight:bold">$((</span><span style="color:#0000cf;font-weight:bold">2</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#204a87;font-weight:bold">))</span><span style="color:#4e9a06">"</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">echo</span> <span style="color:#4e9a06">"2 + 2 fa </span><span style="color:#204a87;font-weight:bold">$((</span><span style="color:#0000cf;font-weight:bold">2</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">2</span><span style="color:#204a87;font-weight:bold">))</span><span style="color:#4e9a06">"</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2 + 2 fa 4
 </span></span></span></code></pre></div><p><strong>NOTA:</strong> il design di queste operazioni è per numeri interi.
 Sebbene <code>zsh</code> supporti operazioni in virgola mobile, <code>bash</code> ed <code>sh</code> non lo fanno.</p>
@@ -1114,9 +1114,9 @@ Sebbene <code>zsh</code> supporti operazioni in virgola mobile, <code>bash</code
 <h3 id="condizionali">Condizionali</h3>
 <p>I condizionali in bash sono simili a quelli in altri linguaggi di programmazione.</p>
 <p>La sintassi di base è:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> comandi<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span> comando1<span style="color:#000;font-weight:bold">;</span> comando2<span style="color:#000;font-weight:bold">;</span> ...<span style="color:#000;font-weight:bold">;</span> comandoN<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">fi</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> comandi<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span> comando1<span style="color:#000;font-weight:bold">;</span> comando2<span style="color:#000;font-weight:bold">;</span> ...<span style="color:#000;font-weight:bold">;</span> comandoN<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">fi</span>
 </span></span></code></pre></div><p>I <code>;</code> possono essere sostituiti da degli a capo negli script per rendere il codice più leggibile:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> condizione<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> condizione<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span>
 </span></span><span style="display:flex;"><span>    comando1
 </span></span><span style="display:flex;"><span>    comando2
 </span></span><span style="display:flex;"><span>    ...
@@ -1133,13 +1133,13 @@ Questo perché, per convenzione, lo stato di uscita <code>0</code> di un process
 <h2 id="bash-scripting-5">Bash scripting</h2>
 <h3 id="condizionali-1">Condizionali</h3>
 <p>Prima di <code>fi</code>, è possibile inserire un blocco <code>else</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> comandi<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> comandi<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span>
 </span></span><span style="display:flex;"><span>    ...
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">else</span>
 </span></span><span style="display:flex;"><span>    ...
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">fi</span>
 </span></span></code></pre></div><p>È possibile concatenare più condizioni con <code>elif</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> condizione1<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> condizione1<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span>
 </span></span><span style="display:flex;"><span>    ...
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">elif</span> condizione2<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">then</span>
 </span></span><span style="display:flex;"><span>    ...
@@ -1178,7 +1178,7 @@ Il comando ha due sintassi distinte ed equivalenti, la seconda delle quali è pi
 <p>Il ciclo <code>while</code> esegue un blocco di comandi fintanto che una condizione è vera,
 similmente a quanto accade in molti linguaggi di programmazione.
 La sintassi è simila a quella di <code>if</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">while</span> condizione<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">do</span> comando1<span style="color:#000;font-weight:bold">;</span> comando2<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">done</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">while</span> condizione<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">do</span> comando1<span style="color:#000;font-weight:bold">;</span> comando2<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">done</span>
 </span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># Alternativa</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">while</span> condizione<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">do</span>
 </span></span><span style="display:flex;"><span>    comando1
@@ -1191,12 +1191,12 @@ e può essere utile per scrivere script idiomatici.</p>
 <h2 id="bash-scripting-8">Bash scripting</h2>
 <h3 id="iterazione-for">Iterazione: <code>for</code></h3>
 <p>Il ciclo <code>for</code> esegue un blocco di comandi per ciascun elemento di una lista.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> variabile in elemento0 elemento1 elemento2<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">do</span> comando1<span style="color:#000;font-weight:bold">;</span> comando2<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">done</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> variabile in elemento0 elemento1 elemento2<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">do</span> comando1<span style="color:#000;font-weight:bold">;</span> comando2<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">done</span>
 </span></span></code></pre></div><p>Ad ogni iterazione, a <code>variabile</code> viene assegnato il valore dell’elemento corrente.</p>
 <p>Un uso interessante di for è iterare su un insieme di file.
 Ad esempio, se volessimo stampare il contenuto di tutti i file <code>txt</code> il cui nome comincia per <code>2024</code>,
 potremmo scrivere:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> file in 2024*.txt<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">do</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">for</span> file in 2024*.txt<span style="color:#000;font-weight:bold">;</span> <span style="color:#204a87;font-weight:bold">do</span>
 </span></span><span style="display:flex;"><span>  cat <span style="color:#000">$file</span><span style="color:#000;font-weight:bold">;</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">done</span>
 </span></span></code></pre></div></section><section>
@@ -1205,7 +1205,7 @@ potremmo scrivere:</p>
 <p>Il comando <code>sort</code> permette di ordinare le righe di un file lessicograficamente,
 oppure, con l’opzione <code>-n</code>.</p>
 <p>Per ordinare un file <code>file.txt</code> e stamparne il contenuto ordinato, si può usare:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>sort file.txt
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>sort file.txt
 </span></span></code></pre></div><p><code>sort</code> funziona anche come filtro, quindi può essere usato in pipe.</p>
 <p>L’ordinamento inverso può essere ottenuto con l’opzione <code>-r</code>.</p>
 <h3 id="identificazione-di-linee-ripetute-uniq">Identificazione di linee ripetute: <code>uniq</code></h3>
@@ -1215,7 +1215,7 @@ oppure, con l’opzione <code>-n</code>.</p>
 dato che anch’esso funziona come filtro.</p>
 <p>Ad esempio, il seguente esempio conta le occorrenze di ciascuna linea in un file <code>file.txt</code>,
 e le mostra dalla meno alla più frequente:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>sort file.txt <span style="color:#000;font-weight:bold">|</span> uniq -c <span style="color:#000;font-weight:bold">|</span> sort -n
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>sort file.txt <span style="color:#000;font-weight:bold">|</span> uniq -c <span style="color:#000;font-weight:bold">|</span> sort -n
 </span></span></code></pre></div></section><section>
 <h2 id="bash-scripting-10">Bash scripting</h2>
 <h3 id="sostituzione-di-testo-sed">Sostituzione di testo: <code>sed</code></h3>
@@ -1237,7 +1237,7 @@ se necessario usarlo in pattern o replacement
 <p>Il risultato non viene scritto sul file, ma stampato sullo standard output.</p>
 <p>Se si desidera invece modificare il file originale, è possibile usare l’opzione <code>-i</code> (modifica “in place”).</p>
 <p>Per esempio, per sostituire tutte le occorrenze di <code>debito</code> con <code>credito</code> all’interno di un file <code>tasse.txt</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>sed -i <span style="color:#4e9a06">'s/debito/credito/g'</span> tasse.txt
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>sed -i <span style="color:#4e9a06">'s/debito/credito/g'</span> tasse.txt
 </span></span></code></pre></div></section><section>
 <h2 id="esercizio-hacking-session">Esercizio: hacking session</h2>
 <p>L’esercizio di riferimento per noi sarà il gioco “Bandit” di <a href="https://overthewire.org/wargames/">OverTheWire</a>,

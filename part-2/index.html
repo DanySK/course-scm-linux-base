@@ -25,7 +25,7 @@
 
     <section><h1 id="basi-di-linux-secondo-modulo">BASI DI LINUX, SECONDO MODULO</h1>
 <h2 id="martina-baiardi"><a href="mailto:m.baiardi@unibo.it">Martina Baiardi</a></h2>
-<h3 id="compiled-2026-01-26">Compiled 2026-01-26</h3>
+<h3 id="compiled-2026-01-28">Compiled 2026-01-28</h3>
 </section><section>
 <h1 id="macro-argomenti">Macro argomenti</h1>
 <h2 id="1-gestione-periferiche">1. Gestione periferiche</h2>
@@ -52,7 +52,7 @@ altri invece consentono di utilizzare protocolli standard per connettersi a peri
 </section><section>
 <h3 id="analisi-delle-periferiche-connesse-al-bus-pci">Analisi delle periferiche connesse al bus PCI</h3>
 <h3 id="lspci"><code>lspci</code></h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> lspci
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> lspci
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">00:00.0 Host bridge: Intel Corporation Coffee Lake HOST and DRAM Controller (rev 0b)
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">00:02.0 VGA compatible controller: Intel Corporation WhiskeyLake-U GT2 [UHD Graphics 620]
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">00:04.0 Signal processing controller: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Thermal Subsystem (rev 0b)
@@ -83,7 +83,7 @@ altri invece consentono di utilizzare protocolli standard per connettersi a peri
 <p>Perchè significa che tali dispositivi non sono direttamente connessi al bus, ma passano per un controller.
 Ad esempio, tutti i miei dispositivi USB sono connessi al <em>controller USB</em>, che a sua volta è connesso al bus pci, il quale infatti è presente nella lista sopra.</p>
 <h3 id="lsusb"><code>lsusb</code></h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> lsusb
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> lsusb
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Bus 001 Device 002: ID 13d3:56cb IMC Networks USB2.0 HD IR UVC WebCam
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Bus 001 Device 003: ID 8087:0aaa Intel Corp. Bluetooth 9460/9560 Jefferson Peak (JfP)
@@ -91,7 +91,7 @@ Ad esempio, tutti i miei dispositivi USB sono connessi al <em>controller USB</em
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Bus 002 Device 003: ID 152d:0578 JMicron Technology Corp. / JMicron USA Technology Corp. JMS578 SATA 6Gb/s
 </span></span></span></code></pre></div><h3 id="lsusb--tv"><code>lsusb -tv</code></h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-style:italic">/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/12p, 480M
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#000;font-style:italic">/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/12p, 480M
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    ID 1d6b:0002 Linux Foundation 2.0 root hub
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    |__ Port 002: Dev 036, If 0, Class=Mass Storage, Driver=usb-storage, 480M
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">        ID ffff:5678 USB Disk 2.0
@@ -147,7 +147,7 @@ però essi rappresentano delle interfacce di basso livello che le applicazioni u
 </ul>
 </div>
 <div class="col">
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh /dev
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh /dev
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">total 4,0K
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  21 root root            4,3K  5 set 12.54 .
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">drwxr-xr-x  18 root root            4,0K  4 set 15.30 ..
@@ -232,7 +232,7 @@ Alcuni esempi:</p>
 <li><code>/dev/null</code>: Accetta qualsiasi tipo di input e lo scarta, senza produrre nessun output. L’utilizzo più comune per questo comando è quello di ignorare degli stream in uscita prodotti da processi.
 Un esempio:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat /dev/random &gt; /dev/null
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat /dev/random &gt; /dev/null
 </span></span></code></pre></div><ul>
 <li><code>/dev/zero</code>: Accetta qualsiasi tipo di input e lo scarta, producendo come output uno stream continuo di NULL (0 bytes). Utile per creare nuovi file contenenti unicamente dei byte a zero, con il fine di pre-allocare lo spazio sul disco.</li>
 </ul>
@@ -271,7 +271,7 @@ Un esempio:</li>
 </section><section>
 <h3 id="lsblk"><code>lsblk</code></h3>
 <p>Consente di consultare i dispositivi a blocchi presenti sul pc (fatta eccezione per la RAM), e informazioni importanti come il <strong>punto di mount</strong>, utilizzato per accedervi.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> lsblk
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> lsblk
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">sda           8:0    1  29,3G  0 disk 
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">nvme0n1     259:0    0 476,9G  0 disk 
@@ -283,7 +283,7 @@ Un esempio:</li>
 </section><section>
 <h3 id="fdisk"><code>fdisk</code></h3>
 <p>Utility di sistema per gestire le partizioni di un disco, in questo ambito utile per investigare a quale file di sistema è stato associato il dispositivo USB connesso.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> fdisk -l
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> fdisk -l
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Disk /dev/nvme0n1: 476,94 GiB, 512110190592 bytes, 1000215216 sectors
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Disk model: WDC PC SN520 SDAPNUW-512G-1002          
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Units: sectors of 1 * 512 = 512 bytes
@@ -314,20 +314,20 @@ mentre il comando <code>lsblk</code> mostra che il device <code>/dev/sda</code> 
 <ol>
 <li>Creo una cartella che voglio utilizzare per accedere al file system del mio dispositivo usb</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> mkdir <span style="color:#000">$HOME</span>/usb
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> mkdir <span style="color:#000">$HOME</span>/usb
 </span></span></code></pre></div><ol start="2">
 <li>Monto il dispositivo all’interno della cartella che ho appena creato</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> mount /dev/sda <span style="color:#000">$HOME</span>/usb
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> mount /dev/sda <span style="color:#000">$HOME</span>/usb
 </span></span></code></pre></div><ol start="3">
 <li>Posso accedere ai dati in lettura e in scrittura</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh <span style="color:#000">$HOME</span>/usb
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh <span style="color:#000">$HOME</span>/usb
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">...
 </span></span></span></code></pre></div><ol start="4">
 <li>Per “scollegare” il dispositivo dal file system basta utilizzare il comando <code>umount</code></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> umount /dev/sda
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> umount /dev/sda
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> ls -alh <span style="color:#000">$HOME</span>/usb
 </span></span></code></pre></div></section><section>
 <h2 id="2-strumenti-di-analisi-e-gestione-dei-processi-1">2. Strumenti di analisi e gestione dei processi</h2>
@@ -377,7 +377,7 @@ La convenzione per gli exit-code è:</p>
 <p>Le tre opzioni vengono tipicamente combinate: <code>ps aux</code></p>
 </section><section>
 <p>È possibile eseguire un processo in background post-ponendo <code>&amp;</code> al comando su terminale. Ad esempio:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> sh -c <span style="color:#4e9a06">'sleep 5 &amp;&amp; echo Terminato!'</span> <span style="color:#000;font-weight:bold">&amp;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> sh -c <span style="color:#4e9a06">'sleep 5 &amp;&amp; echo Terminato!'</span> <span style="color:#000;font-weight:bold">&amp;</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1] 131593
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">$</span> <span style="color:#204a87">jobs</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">[1]  + 131593 running    sh -c 'sleep 5 &amp;&amp; echo Terminato!'
@@ -393,7 +393,7 @@ La convenzione per gli exit-code è:</p>
 </section><section>
 <h3 id="visualizzazione-dei-processi-in-esecuzione-top--htop">Visualizzazione dei processi in esecuzione (<code>top</code> / <code>htop</code>)</h3>
 <p><code>top</code> Consente di avere una visione real-time dei processi in esecuzione, insieme ad una preziosa panoramica delle risorse utilizzate rispetto alle totali.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> top
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> top
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">top - 15:33:59 up  4:42,  2 users,  load average: 2,70, 6,53, 4,70
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Tasks: 339 total,   1 running, 338 sleeping,   0 stopped,   0 zombie
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902">%</span>Cpu<span style="color:#ce5c00;font-weight:bold">(</span>s<span style="color:#ce5c00;font-weight:bold">)</span>:  3,4 us,  1,5 sy,  0,0 ni, 94,4 id,  0,1 wa,  0,5 hi,  0,2 si,  0,0 st 
@@ -460,13 +460,13 @@ prende un nome di processo e invia il segnale a tutti i processi che corrispondo
 <h3 id="load-average">Load average</h3>
 <p>La prima riga di output del comando <code>top</code> riporta delle informazioni importanti per un amministratore di sistema,
 infatti, esse mostrano da quanto tempo il computer è in esecuzione, quanti utenti sono attivi in un determinato momento e qual è il <em>load average</em> del sistema.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> top
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> top
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">top - 15:33:59 up  4:42,  2 users,  load average: 2,70, 6,53, 4,70
 </span></span></span></code></pre></div><p>Il <em>load average</em> non è altro che la media del numero di processi in attesa di essere eseguiti dal processore.</p>
 <p>La metrica mostra tre valori in quanto rappresentano la media per gli ultimi 1, 5 e 15 minuti d’esecuzione.</p>
 <br>
 <p><strong>Si può ottenere la stessa informazione eseguendo il comando <code>uptime</code></strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> uptime
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> uptime
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic"> 16:06:02 up  5:14,  2 users,  load average: 1,02, 1,19, 1,77
 </span></span></span></code></pre></div></section><section>
 <h3 id="amministrazione-dei-processi">Amministrazione dei processi</h3>
@@ -515,7 +515,7 @@ se <code>0</code> indica il riavvio corrente, <code>-1</code> indica quello prec
 
 
 <span class="fragment ">
-  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat /etc/logrotate.conf
+  <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> cat /etc/logrotate.conf
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> see <span style="color:#4e9a06">"man logrotate"</span> <span style="color:#204a87;font-weight:bold">for</span> details
 </span></span><span style="display:flex;"><span><span style="color:#8f5902">#</span> rotate log files weekly
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">weekly
@@ -1048,7 +1048,7 @@ Questo significa che se è necessaria, verrà implementata direttamente nel live
 <br>
 <h4 id="ip-link-list"><code>ip link list</code></h4>
 <p>Consente di visualizzare la lista delle interfacce di rete configurate all’interno della macchina, insieme al loro <em>stato</em>.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
@@ -1067,7 +1067,7 @@ Questo significa che se è necessaria, verrà implementata direttamente nel live
 <br>
 <h4 id="ip-addr-list"><code>ip addr list</code></h4>
 <p>Oltre a mostrare le informazioni legate allo stato delle interfacce di rete disponibili, mostra quali sono gli IP (v4 e v6) associati a tali interfacce.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip addr list
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip addr list
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    inet 127.0.0.1/8 scope host lo
@@ -1089,7 +1089,7 @@ Questo significa che se è necessaria, verrà implementata direttamente nel live
 </section><section>
 <h3 id="abilitaredisabilitare-una-interfaccia">Abilitare/Disabilitare una interfaccia</h3>
 <h4 id="ip-link-set-interface-status"><code>ip link set &lt;interface&gt; &lt;status&gt;</code></h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list wlo1
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip link list wlo1
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
@@ -1106,7 +1106,7 @@ Questo significa che se è necessaria, verrà implementata direttamente nel live
 </section><section>
 <h3 id="assegnare-un-ip-ad-una-interfaccia-di-rete">Assegnare un IP ad una interfaccia di rete</h3>
 <h4 id="ip-addr-add-ipsubnet_mask-dev-interface"><code>ip addr add &lt;ip&gt;/&lt;subnet_mask&gt; dev &lt;interface&gt;</code></h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip addr list wlo1
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip addr list wlo1
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2: wlo1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    link/ether f4:d1:08:a5:11:bc brd ff:ff:ff:ff:ff:ff
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">    altname wlp0s20f3
@@ -1137,7 +1137,7 @@ Questo significa che al riavvio della macchina tutte le modifiche saranno elimin
 </ul>
 </section><section>
 <h4 id="etcnetworkinterfaces">/etc/network/interfaces</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">#</span> The loopback interface.
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">#</span> The loopback interface.
 </span></span><span style="display:flex;"><span><span style="color:#a40000">
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">auto lo
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">iface lo inet loopback
@@ -1157,7 +1157,7 @@ Questo significa che al riavvio della macchina tutte le modifiche saranno elimin
 </span></span></span></code></pre></div></section><section>
 <h3 id="tabella-di-instradamento-degli-ip-nel-mio-host">Tabella di instradamento degli ip nel mio host</h3>
 <h4 id="ip-route-list"><code>ip route list</code></h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip route list
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ip route list
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">default via 172.20.10.1 dev wlo1 proto dhcp src 172.20.10.5 metric 600 
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">172.20.10.0/28 dev wlo1 proto kernel scope link src 172.20.10.5 metric 600 
 </span></span></span></code></pre></div><p>So che il mio <em>default gateway</em> è <code>172.20.10.1</code>, che è l’indiririzzo del router nella mia sotto-rete che mi consente la comunicazione verso l’esterno.</p>
@@ -1169,7 +1169,7 @@ Questo significa che al riavvio della macchina tutte le modifiche saranno elimin
 <p><em>wpa supplicant</em> è un demone di sistema che consente di gestire proprio questo tipo di connesioni.</p>
 <h4 id="iwlist-scan"><code>iwlist scan</code></h4>
 <p>Consente di effettuare una scansione per individuare gli <code>SSID</code> raggiungibili dalla connessione WiFi del mio computer.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> iwlist scan
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> iwlist scan
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">...
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">lo        Interface doesn't support scanning.
 </span></span></span><span style="display:flex;"><span><span style="color:#a40000">
@@ -1228,7 +1228,7 @@ Questo significa che al riavvio della macchina tutte le modifiche saranno elimin
 Quando la destinazione riceve un messaggio di ping risponde al mittente, e il comando tiene traccia del tempo che il specifico messaggio ha impiegato per andare a destinazione e tornare indietro.</p>
 <p>Il monitoraggio del tempo di transito di questo pacchetto consente di verificare l’efficienza della comunicazione di rete.</p>
 <p>Posso specificare come host un indirizzo ip o un hostname.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ping google.com
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> ping google.com
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">ping google.com
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">PING google.com (142.251.209.46) 56(84) bytes of data.
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">64 bytes from mil04s51-in-f14.1e100.net (142.251.209.46): icmp_seq=1 ttl=116 time=29.3 ms
@@ -1242,7 +1242,7 @@ Quando la destinazione riceve un messaggio di ping risponde al mittente, e il co
 <div class="col">
 <h4 id="traceroute"><code>traceroute</code></h4>
 <p>Fornisce una mappa del percorso compiuto dai dati su Internet dall’origine alla destinazione, mostrando il percorso compiuto dal pacchetto.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> traceroute 8.8.8.8
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> traceroute 8.8.8.8
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">1  _gateway (172.20.10.1)  6.582 ms  6.438 ms  6.377 ms
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">2  * * *
@@ -1257,7 +1257,7 @@ Quando la destinazione riceve un messaggio di ping risponde al mittente, e il co
 <div class="col">
 <h4 id="nslookup"><code>nslookup</code></h4>
 <p>Consente di effettuare delle query DNS per ottenere l’indirizzo ip associato ad un hostname.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> nslookup google.com
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#8f5902">$</span> nslookup google.com
 </span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Server:         172.20.10.1
 </span></span></span><span style="display:flex;"><span><span style="color:#000;font-style:italic">Address:        172.20.10.1#53
 </span></span></span><span style="display:flex;"><span><span style="color:#a40000">
